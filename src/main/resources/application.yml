@@ -1,0 +1,13 @@
+server:
+  port: 80
+  servlet:
+    context-path: /
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  profiles:
+    active: dev
+  jackson:
+    time-zone: GMT+8
+    # 加上这个配置，从前台接收LocalDateTime类型可直接使用@DateTimeFormat注解
+    date-format: yyyy-MM-dd HH:mm:ss
