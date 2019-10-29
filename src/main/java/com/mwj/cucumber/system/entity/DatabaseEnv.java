@@ -4,28 +4,37 @@ import com.mwj.cucumber.framework.web.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
  * @author Meng Wei Jin
- * @date Create in 2019-10-28 21:45
+ * @date Create in 2019-10-29 21:57
  **/
-
 @Entity
-@Table(name = "TEST_TASK")
+@Table(name = "DATABASE_ENV")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class TestTask extends BaseEntity {
+public class DatabaseEnv extends BaseEntity {
 
-    @Column(length = 64, unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 64)
     private String name;
 
     @Column
     private String description;
 
     @Column(nullable = false)
-    private Long databaseEnvId;
+    private String driverClassName;
+
+    @Column(nullable = false)
+    private String url;
+
+    @Column(nullable = false)
+    private String username;
+
+    @Column
+    private String password;
 }

@@ -1,4 +1,4 @@
-package com.mwj.cucumber.framework.idgenerator;
+package com.mwj.cucumber.framework.jpa;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;

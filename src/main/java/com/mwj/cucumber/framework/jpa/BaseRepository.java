@@ -3,6 +3,9 @@ package com.mwj.cucumber.framework.jpa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
+/**
+ * @author mengweijin
+ */
 @NoRepositoryBean
 public interface BaseRepository<T, ID> extends JpaRepository<T, ID> {
 

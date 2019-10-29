@@ -23,12 +23,37 @@ import javax.persistence.Table;
 @ToString(callSuper = true)
 public class TestCase extends BaseEntity {
 
-    @Column
+    @Column(nullable = false)
     private String url;
 
     @Enumerated(value = EnumType.STRING)
-    @Column
+    @Column(nullable = false)
     private HttpMethod httpMethod;
 
+    /**
+     * header json
+     */
+    @Column
+    private String headers;
 
+    /**
+     * requestBody json
+     */
+    @Column
+    private String requestBody;
+
+    /**
+     * expect http status code
+     */
+    @Column
+    private Integer httpStatus;
+
+    /**
+     * expect response body
+     */
+    @Column
+    private String responseBody;
+
+    @Column(nullable = false)
+    private Long testTaskId;
 }

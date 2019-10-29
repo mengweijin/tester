@@ -1,11 +1,8 @@
 package com.mwj.cucumber.system.controller;
 
-
 import com.mwj.cucumber.framework.page.Pager;
 import com.mwj.cucumber.framework.web.controller.BaseController;
-import com.mwj.cucumber.system.entity.TestCase;
-import com.mwj.cucumber.system.enums.HttpMethod;
-import com.mwj.cucumber.system.service.TestCaseService;
+import com.mwj.cucumber.system.service.DatabaseEnvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,23 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @date Create in 2019-07-27 17:27
  **/
 @RestController
-@RequestMapping("/case")
-public class TestCaseController extends BaseController {
+@RequestMapping("/databaseEnv")
+public class DatabaseEnvController extends BaseController {
 
     @Autowired
-    private TestCaseService testCaseService;
-
-    @PostMapping("/insert")
-    public void insert(){
-        TestCase testCase = new TestCase();
-        testCase.setUrl("http://localhost:80");
-        testCase.setHttpMethod(HttpMethod.GET);
-        testCaseService.save(testCase);
-    }
+    private DatabaseEnvService databaseEnvService;
 
     @PostMapping("/page")
     public Page findPage(Pager pager){
         Pageable pageable = PageRequest.of(pager.getPage(), pager.getLimit());
-        return testCaseService.findAll(pageable);
+        return databaseEnvService.findAll(pageable);
     }
 }

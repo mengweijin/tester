@@ -39,7 +39,7 @@ public abstract class BaseEntity {
 
     private static final String ID_GENERATOR_NAME = "ID_GENERATOR";
 
-    private static final String STRATEGY_TIMESTAMP = "com.mwj.cucumber.framework.idgenerator.TimestampIdGenerator";
+    private static final String STRATEGY_TIMESTAMP = "com.mwj.cucumber.framework.jpa.TimestampIdGenerator";
 
     /**
      * 自动生成主键
@@ -74,4 +74,15 @@ public abstract class BaseEntity {
     @Column(name = "UPDATE_TIME")
     protected LocalDateTime updateTime;
 
+    /**
+     * 删除标记 --系统只做逻辑删除
+     */
+    @Column
+    protected Boolean deleted = Boolean.FALSE;
+
+    /**
+     * 启用标记 --默认已启用
+     */
+    @Column
+    protected Boolean enabled = Boolean.TRUE;
 }
