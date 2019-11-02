@@ -8,6 +8,7 @@ spring:
   profiles:
     active: dev
   jackson:
+    # GMT+8, UTC（默认）等
     time-zone: GMT+8
-    # 加上这个配置，从前台接收LocalDateTime类型可直接使用@DateTimeFormat注解
+    # 和上面time-zone配合使用
     date-format: yyyy-MM-dd HH:mm:ss

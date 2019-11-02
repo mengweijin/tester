@@ -81,7 +81,7 @@ public abstract class BaseEntity {
     protected Boolean deleted = Boolean.FALSE;
 
     /**
-     * 启用标记 --默认已启用
+     * 启用标记 --默认启用
      */
     @Column
     protected Boolean enabled = Boolean.TRUE;

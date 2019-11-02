@@ -1,10 +1,12 @@
 package com.mwj.cucumber.system.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.mwj.cucumber.framework.web.entity.BaseEntity;
-import com.mwj.cucumber.system.enums.HttpMethod;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.springframework.http.HttpMethod;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -54,6 +56,7 @@ public class TestCase extends BaseEntity {
     @Column
     private String responseBody;
 
+    @JsonSerialize(using = ToStringSerializer.class)
     @Column(nullable = false)
     private Long testTaskId;
 }

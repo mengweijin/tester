@@ -1,15 +1,13 @@
 package com.mwj.cucumber.system.controller;
-
-
 import com.mwj.cucumber.framework.page.Pager;
 import com.mwj.cucumber.framework.web.controller.BaseController;
 import com.mwj.cucumber.system.entity.TestCase;
-import com.mwj.cucumber.system.enums.HttpMethod;
 import com.mwj.cucumber.system.service.TestCaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +29,15 @@ public class TestCaseController extends BaseController {
     public void insert(){
         TestCase testCase = new TestCase();
         testCase.setUrl("http://localhost:80");
-        testCase.setHttpMethod(HttpMethod.GET);
+        testCase.setHttpMethod(HttpMethod.POST);
+        testCase.setHeaders("header");
+        testCase.setRequestBody("requestBody");
+        testCase.setHttpStatus(200);
+        testCase.setResponseBody("response body");
+        testCase.setTestTaskId(1L);
+        testCase.setDeleted(false);
+        testCase.setEnabled(false);
+
         testCaseService.save(testCase);
     }
 
