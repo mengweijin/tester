@@ -1,14 +1,9 @@
 server:
   port: 80
   servlet:
-    context-path: /
+    context-path: /mwj-cucumber
   tomcat:
     uri-encoding: UTF-8
 spring:
   profiles:
     active: dev
-  jackson:
-    # GMT+8, UTC（默认）等
-    time-zone: GMT+8
-    # 和上面time-zone配合使用
-    date-format: yyyy-MM-dd HH:mm:ss

@@ -32,5 +32,4 @@ build/
 
 /h2/
 /logs/
-/feature/
-/report/
+/cucumber/

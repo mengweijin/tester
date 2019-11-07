@@ -1,4 +1,5 @@
-package com.mwj.cucumber.framework.feature.step;
+package com.mwj.cucumber.framework.cucumber.step;
+
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -10,21 +11,21 @@ import lombok.extern.slf4j.Slf4j;
  * @date Create in 2019-10-26 15:19
  **/
 @Slf4j
-public class StepDefinitions implements En {
+public class RestfulSteps implements En {
 
-    @Before("@Transactional")
+    @Before("@PrepareData")
     public void beforeScenario() {
-        // todo 开启事务
+        // todo
         System.out.println("*****************************************todo 开启事务");
     }
 
-    @After("@Transactional")
+    @After("@ClearData")
     public void afterScenario() {
-        // todo 回滚事务
+        // todo
         System.out.println("*****************************************todo 回滚事务");
     }
 
-    public StepDefinitions(){
+    public RestfulSteps(){
         Given("today is Friday", () -> {
             System.out.println("*****************************************today is Friday");
         });
