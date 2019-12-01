@@ -10,11 +10,11 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.mwj.cucumber</groupId>
-    <artifactId>mwj-cucumber</artifactId>
+    <groupId>com.mwj.tester</groupId>
+    <artifactId>mwj-tester</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>mwj-cucumber</name>
+    <name>mwj-tester</name>
     <description>Behaviour-Driven Development(BDD) Test Automation Frameworks</description>
 
     <properties>
