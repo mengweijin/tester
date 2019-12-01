@@ -22,6 +22,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -35,7 +36,7 @@ import java.time.LocalDateTime;
 @DynamicUpdate
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class BaseEntity {
+public abstract class BaseEntity implements Serializable {
 
     private static final String ID_GENERATOR_NAME = "ID_GENERATOR";
 
@@ -77,12 +78,12 @@ public abstract class BaseEntity {
     /**
      * 删除标记 --系统只做逻辑删除
      */
-    @Column
+    @Column(name = "DELETED")
     protected Boolean deleted = Boolean.FALSE;
 
     /**
      * 启用标记 --默认启用
      */
-    @Column
+    @Column(name = "ENABLED")
     protected Boolean enabled = Boolean.TRUE;
 }
