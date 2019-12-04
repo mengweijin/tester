@@ -1,7 +1,7 @@
 server:
   port: 80
   servlet:
-    context-path: /mwj-cucumber
+    context-path: /mwj-tester
   tomcat:
     uri-encoding: UTF-8
 spring:
