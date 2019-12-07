@@ -30,6 +30,5 @@ build/
 ### VS Code ###
 .vscode/
 
-/h2/
-/logs/
-/cucumber/
+h2/
+logs/

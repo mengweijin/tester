@@ -1,0 +1,50 @@
+#开发环境配置
+server:
+  #服务端口
+  port: 80
+  servlet:
+    # 项目contextPath
+    context-path: /
+    session:
+      # session失效时间，单位：分钟
+      timeout: 30m
+#Spring配置
+spring:
+  profiles:
+    active: h2
+  flyway:
+    enabled: true
+    # flyway默认位置classpath:/db/migration，配置多个位置可用英文逗号分割
+    locations: classpath:/db/mysql
+    sql-migration-prefix: V
+    # 设置为true，当迁移发现数据库非空且存在没有元数据的表时，自动执行基准迁移，新建schema_version表
+    baseline-on-migrate: true
+# mybatis-plus
+mybatis-plus:
+  # MyBatis Mapper 所对应的 XML 文件位置，如果您在 Mapper 中有自定义方法（XML 中有自定义实现），需要进行该配置，告诉 Mapper 所对应的 XML 文件位置。
+  mapper-locations: classpath*:/mapper/**/*.xml
+  # 配置扫描通用枚举，支持统配符 * 或者 ; 分割，如果配置了该属性，会将路径下的枚举类进行注入，让实体类字段能够简单快捷的使用枚举属性
+  #type-enums-package: com.mwj.project.common.enums
+  global-config:
+    # 是否控制台 print mybatis-plus 的 LOGO
+    banner: false
+    db-config:
+      # 全局默认主键类型。默认值ID_WORKER
+      id-type: ID_WORKER
+      # 全局逻辑删除字段值 3.3.0开始支持，详情看下面。
+      logic-delete-field: deleted
+      # 逻辑已删除值(默认为 1)
+      logic-delete-value: 1
+      # 逻辑未删除值(默认为 0)
+      logic-not-delete-value: 0
+  configuration:
+    # MyBatis 在使用 resultMap 来映射查询结果中的列，如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段，
+    # 这就导致在调用到该字段的时候由于没有映射，取不到而报空指针异常。
+    call-setters-on-nulls: true
+    # 对JavaBean中属性开启自动驼峰命名规则（camel case）映射，默认对返回类型为Map的对象的key不起作用，所以需要使用自定义MybatisMapWrapperFactory类来处理
+    map-underscore-to-camel-case: true
+#日志配置
+logging:
+  file: logs/app.log
+  level:
+    root: info

@@ -1,0 +1,21 @@
+# 调试模式。核心Logger（包含嵌入式容器、hibernate、spring）会输出更多内容，但是你自己应用的日志并不会输出为DEBUG级别。
+debug: false
+#日志配置
+logging:
+  level:
+    root: debug
+spring:
+  datasource:
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:h2:file:./h2/mwj_tester;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL
+    username: sa
+    password:
+  h2:
+    console:
+      # 是否允许网页访问，默认false
+      enabled: true
+      # h2数据库的访问路径：http://localhost:80/h2（默认为/h2-console）
+      path: /h2
+      settings:
+        # 是否允许从其他地方访问，还是只允许从本地访问
+        web-allow-others: true
