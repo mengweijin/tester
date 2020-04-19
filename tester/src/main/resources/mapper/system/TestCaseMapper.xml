@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mengweijin.tester.system.mapper.TestCaseMapper">
+
+    <select id="selectDatasourceName" resultType="java.lang.String">
+        select datasource.name
+        from AT_TEST_CASE case
+        left join AT_TEST_API api on case.api_id=api.id
+        left join AT_DATASOURCE_INFO datasource on api.datasource_id=datasource.id
+        <where>
+            case.id=#{caseId}
+        </where>
+    </select>
+</mapper>

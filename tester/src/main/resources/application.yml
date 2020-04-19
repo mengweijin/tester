@@ -1,0 +1,35 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  profiles:
+    active: dev
+  mvc:
+    throw-exception-if-no-handler-found: true
+  messages:
+    # 国际化资源文件路径
+    basename: messages
+  jackson:
+    # 默认就是UTC时区
+    #time-zone: UTC
+    # 加上这个配置，从前台接收LocalDateTime类型可直接使用@DateTimeFormat注解
+    #date-format: yyyy-MM-dd HH:mm:ss
+    # 序列化所有实体类的字段，包括值为null的
+    default-property-inclusion: ALWAYS
+# Spring Boot的actuator（健康监控）功能，访问：http://localhost:80/actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        # 要暴露出来的接口，可配置：health(默认), info（默认）, * 代表所有
+        include: ["*"]
+        #exclude: ["trace"]
+  #server:
+    #不配置的话默认使用应用程序下的端口
+    #port: 80
+      #servlet:
+      # 默认即为：/actuator
+    #context-path: /actuator
