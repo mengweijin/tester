@@ -68,4 +68,9 @@ public class TestCase extends BaseEntity {
      */
     private ECaseStatus status;
 
+    /**
+     * test case failed message.
+     */
+    private String failedMessage;
+
 }

@@ -1,6 +1,6 @@
 package com.mengweijin.tester.system.service;
 
-import com.mengweijin.tester.system.entity.DatasourceInfo;
+import com.mengweijin.tester.system.entity.DataSourceInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author Meng Wei Jin
  * @since 2020-04-18
  */
-public interface DatasourceInfoService extends IService<DatasourceInfo> {
+public interface DataSourceInfoService extends IService<DataSourceInfo> {
 
 }

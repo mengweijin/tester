@@ -3,7 +3,7 @@ package com.mengweijin.tester.system.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.mengweijin.tester.system.service.DatasourceInfoService;
+import com.mengweijin.tester.system.service.DataSourceInfoService;
 
 /**
  * <p>
@@ -15,9 +15,9 @@ import com.mengweijin.tester.system.service.DatasourceInfoService;
  */
 @RestController
 @RequestMapping("/system/datasourceInfo")
-public class DatasourceInfoController {
+public class DataSourceInfoController {
 
     @Autowired
-    private DatasourceInfoService datasourceInfoService;
+    private DataSourceInfoService datasourceInfoService;
 
 }

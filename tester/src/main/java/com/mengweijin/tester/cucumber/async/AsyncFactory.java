@@ -1,10 +1,15 @@
 package com.mengweijin.tester.cucumber.async;
 
-import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.db.Session;
+import cn.hutool.db.ds.DSFactory;
 import com.mengweijin.mwjwork.framework.constant.Const;
 import com.mengweijin.mwjwork.framework.util.SpringUtils;
 import com.mengweijin.tester.cucumber.CucumberService;
 import com.mengweijin.tester.cucumber.CucumberUtils;
+import com.mengweijin.tester.cucumber.ScenarioThreadLocal;
+import com.mengweijin.tester.cucumber.entity.StepVariable;
+import com.mengweijin.tester.system.service.TestCaseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
@@ -20,29 +25,27 @@ import java.util.concurrent.Future;
 @Component
 public class AsyncFactory {
 
-    @Async("simpleAsync")
+    @Async("simple")
     public Future<String> runCase(Long caseId) {
-        File featureDirectory = FileUtil.file(CucumberUtils.CUCUMBER_FEATURE_TMP_PATH);
-        File jsonReportFile = FileUtil.file(CucumberUtils.CUCUMBER_JSON_REPORT_FILE_PATH);
+        StepVariable stepVariable = new StepVariable();
+        stepVariable.setCaseId(caseId);
+        TestCaseService testCaseService = SpringUtils.getBean(TestCaseService.class);
+        String dataSourceName = testCaseService.selectDatasourceName(caseId);
+        if(StrUtil.isNotEmpty(dataSourceName)){
+            Session session = Session.create(DSFactory.get(dataSourceName));
+            stepVariable.setSession(session);
+        }
+
+        ScenarioThreadLocal.set(stepVariable);
 
         CucumberService cucumberService = SpringUtils.getBean(CucumberService.class);
-        cucumberService.generateCaseFeature(caseId, featureDirectory);
+        File feature = cucumberService.generateCaseFeature(caseId);
+        CucumberUtils.runCucumber(feature);
 
-        CucumberUtils.runCucumber(featureDirectory, jsonReportFile);
+        ScenarioThreadLocal.clear();
 
-        // TODO 压缩，移动位置，删除临时文件
+        // TODO 更新case状态，删除临时文件
         return new AsyncResult<>(Const.SUCCESS);
     }
 
-    @Async("simpleAsync")
-    public Future<String> runApiCase(Long apiId) {
-        File featureDirectory = FileUtil.file(CucumberUtils.CUCUMBER_FEATURE_TMP_PATH);
-        File jsonReportFile = FileUtil.file(CucumberUtils.CUCUMBER_JSON_REPORT_FILE_PATH);
-
-        CucumberService cucumberService = SpringUtils.getBean(CucumberService.class);
-        cucumberService.generateApiFeature(apiId, featureDirectory);
-
-        CucumberUtils.runCucumber(featureDirectory, jsonReportFile);
-        return new AsyncResult<>(Const.SUCCESS);
-    }
 }

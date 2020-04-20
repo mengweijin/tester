@@ -3,10 +3,14 @@ package com.mengweijin.tester.system.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mengweijin.tester.cucumber.async.AsyncFactory;
 import com.mengweijin.tester.system.entity.TestApi;
+import com.mengweijin.tester.system.entity.TestCase;
 import com.mengweijin.tester.system.mapper.TestApiMapper;
 import com.mengweijin.tester.system.service.TestApiService;
+import com.mengweijin.tester.system.service.TestCaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -20,6 +24,9 @@ import org.springframework.stereotype.Service;
 public class TestApiServiceImpl extends ServiceImpl<TestApiMapper, TestApi> implements TestApiService {
 
     @Autowired
+    private TestCaseService testCaseService;
+
+    @Autowired
     private TestApiMapper testApiMapper;
 
     @Autowired
@@ -27,6 +34,7 @@ public class TestApiServiceImpl extends ServiceImpl<TestApiMapper, TestApi> impl
 
     @Override
     public void runApiCase(Long apiId) {
-        asyncFactory.runApiCase(apiId);
+        List<TestCase> testCaseList = testCaseService.lambdaQuery().eq(TestCase::getApiId, apiId).list();
+        testCaseList.forEach(testCase -> asyncFactory.runCase(testCase.getId()));
     }
 }

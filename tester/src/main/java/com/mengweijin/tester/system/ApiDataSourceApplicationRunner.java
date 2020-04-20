@@ -4,8 +4,8 @@ import cn.hutool.db.ds.DSFactory;
 import cn.hutool.db.ds.pooled.PooledDSFactory;
 import cn.hutool.setting.GroupedMap;
 import cn.hutool.setting.Setting;
-import com.mengweijin.tester.system.entity.DatasourceInfo;
-import com.mengweijin.tester.system.service.DatasourceInfoService;
+import com.mengweijin.tester.system.entity.DataSourceInfo;
+import com.mengweijin.tester.system.service.DataSourceInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -16,7 +16,7 @@ import java.util.List;
 public class ApiDataSourceApplicationRunner implements ApplicationRunner {
 
     @Autowired
-    private DatasourceInfoService datasourceInfoService;
+    private DataSourceInfoService datasourceInfoService;
 
     /**
      * init data source
@@ -24,17 +24,17 @@ public class ApiDataSourceApplicationRunner implements ApplicationRunner {
      */
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        List<DatasourceInfo> datasourceInfoList = datasourceInfoService.list();
+        List<DataSourceInfo> dataSourceInfoList = datasourceInfoService.list();
         Setting setting = new Setting();
         GroupedMap groupedMap = setting.getGroupedMap();
-        datasourceInfoList.forEach(datasourceInfo -> {
-            groupedMap.put(datasourceInfo.getName(), "url", datasourceInfo.getUrl());
-            groupedMap.put(datasourceInfo.getName(), "username", datasourceInfo.getUsername());
-            groupedMap.put(datasourceInfo.getName(), "password", datasourceInfo.getPassword());
-            groupedMap.put(datasourceInfo.getName(), "showSql", datasourceInfo.getShowSql());
-            groupedMap.put(datasourceInfo.getName(), "formatSql", datasourceInfo.getFormatSql());
-            groupedMap.put(datasourceInfo.getName(), "showParams", datasourceInfo.getShowSql());
-            groupedMap.put(datasourceInfo.getName(), "sqlLevel", datasourceInfo.getSqlLevel());
+        dataSourceInfoList.forEach(dataSourceInfo -> {
+            groupedMap.put(dataSourceInfo.getName(), "url", dataSourceInfo.getUrl());
+            groupedMap.put(dataSourceInfo.getName(), "username", dataSourceInfo.getUsername());
+            groupedMap.put(dataSourceInfo.getName(), "password", dataSourceInfo.getPassword());
+            groupedMap.put(dataSourceInfo.getName(), "showSql", dataSourceInfo.getShowSql());
+            groupedMap.put(dataSourceInfo.getName(), "formatSql", dataSourceInfo.getFormatSql());
+            groupedMap.put(dataSourceInfo.getName(), "showParams", dataSourceInfo.getShowSql());
+            groupedMap.put(dataSourceInfo.getName(), "sqlLevel", dataSourceInfo.getSqlLevel());
         });
 
         DSFactory.setCurrentDSFactory(new PooledDSFactory(setting));

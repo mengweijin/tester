@@ -18,7 +18,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 @TableName("AT_DATASOURCE_INFO")
-public class DatasourceInfo extends BaseEntity {
+public class DataSourceInfo extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 

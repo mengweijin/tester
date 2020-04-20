@@ -34,28 +34,16 @@ public class CucumberService {
 
     /**
      * generate feature file
-     * @param apiId test case id
-     * @param featureDir feature directory
-     */
-    public void generateApiFeature(Long apiId, File featureDir) {
-        List<TestCase> testCaseList = testCaseService.lambdaQuery().eq(TestCase::getApiId, apiId).list();
-        testCaseList.forEach(testCase -> {
-            generateCaseFeature(testCase.getId(), featureDir);
-        });
-    }
-
-    /**
-     * generate feature file
      * @param caseId test case id
-     * @param featureDir feature directory
+     * @return feature file
      */
-    public void generateCaseFeature(Long caseId, File featureDir) {
+    public File generateCaseFeature(Long caseId) {
         TestCase testCase = testCaseService.getById(caseId);
         TestApi testApi = testApiService.getById(testCase.getApiId());
 
         List<TestStep> stepAssertList = testStepService.lambdaQuery()
                 .eq(TestStep::getCaseId, caseId)
-                .orderByAsc(TestStep::getDefaultIndex)
+                .orderByAsc(TestStep::getIndex)
                 .list();
         List<String> featureContentList = new ArrayList<>(stepAssertList.size() + 4);
         featureContentList.add("Feature: " + testCase.getName());
@@ -71,14 +59,13 @@ public class CucumberService {
         tagBuilder.append(ETag.END.tag());
         featureContentList.add(tagBuilder.toString());
         featureContentList.add("    Scenario: " + testCase.getDescription());
-        stepAssertList.forEach(testStep -> {
-            featureContentList.add("        " + testStep.getStep().getFeatureLine());
-        });
+        stepAssertList.forEach(testStep -> featureContentList.add("        " + testStep.getStep().getFeatureLine()));
 
+        // TODO 保存feature内容到数据库，便于问题排查
         log.debug("Feature content: {}", JSONObject.toJSONString(featureContentList));
 
-        FileUtil.mkdir(featureDir);
-        File featureFile = FileUtil.file(featureDir.getAbsolutePath() + File.separatorChar + "case_" + caseId + ".feature");
-        FileUtil.writeLines(featureContentList, featureFile, StandardCharsets.UTF_8);
+        File feature = FileUtil.file(CucumberUtils.CUCUMBER_FEATURE_TMP_PATH + caseId + File.separatorChar + "case_" + caseId + ".feature");
+        FileUtil.mkdir(feature.getParentFile());
+        return FileUtil.writeLines(featureContentList, feature, StandardCharsets.UTF_8);
     }
 }

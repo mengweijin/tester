@@ -44,19 +44,26 @@ public class TestStep extends BaseEntity {
 
     /**
      * 需要断言的键。可选如下：
-     * 1. httpCode: 接口响应的Http状态码；
-     * 2. response: 接口响应的响应体；
-     * 3. response中的JSON path（多个以英文分号分隔）:
-     * 4. 当STEP NAME是ASSERT_DB_DATA时，需要写查询SQL来验证对应的值；'
+     * GIVEN_TOKEN:                    keep empty.
+     * GIVEN_HTTP_HEADER:              keep empty.
+     * WHEN_CALL_API:                  keep empty.
+     * ASSERT_HTTP_CODE:               keep empty.
+     * THEN_ASSERT_RESPONSE_JSON_PATH: JSON path in response body.
+     * ASSERT_RESPONSE:                keep empty.
+     * ASSERT_DB_DATA:                 write assert query SQL. If include a date type, please format it in SQL.
      */
-    private String key;
+    private String assertKey;
+
     /**
-     * 需要断言的键。可选如下：
-     * 1. httpCode: 如：200；404；403；等；
-     * 2. response: 接口响应的原样JSON；
-     * 3. response中的JSON path（多个以英文分号分隔）: 请参考示例值；
-     * 4. 当STEP NAME是ASSERT_DB_DATA时，需要写查询SQL来验证对应的值：用中括号包裹起来的JSON"
+     * 预期的结果。
+     * GIVEN_TOKEN:                    keep empty.
+     * GIVEN_HTTP_HEADER:              keep empty.
+     * WHEN_CALL_API:                  keep empty.
+     * ASSERT_HTTP_CODE:               200;400;404;等
+     * THEN_ASSERT_RESPONSE_JSON_PATH: JSON path的 value.
+     * ASSERT_RESPONSE:                完整的response body.
+     * ASSERT_DB_DATA:                 []括起来的sql查询结果
      */
-    private String value;
+    private String expectValue;
 
 }
