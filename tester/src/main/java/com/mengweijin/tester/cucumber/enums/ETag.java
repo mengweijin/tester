@@ -10,17 +10,15 @@ public enum ETag implements IEnum {
     TRANSACTIONAL("@Transactional"),
     ROLLBACK("@Rollback"),
     COMMIT("@Commit"),
-    PREPARE_DATA("@PrepareData"),
-    TEST_CASE_ID("@TestCaseId"),
-    END("@End");
+    PREPARE_DATA("@PrepareData");
 
     private String tag;
 
-    ETag(String tag){
+    ETag(String tag) {
         this.tag = tag;
     }
 
-    public String tag(){
+    public String tag() {
         return this.tag;
     }
 

@@ -1,7 +1,7 @@
 package com.mengweijin.tester.cucumber;
 
 import cn.hutool.core.io.FileUtil;
-import com.alibaba.fastjson.JSONObject;
+import cn.hutool.core.util.StrUtil;
 import com.mengweijin.mwjwork.framework.constant.Const;
 import com.mengweijin.tester.cucumber.enums.ETag;
 import com.mengweijin.tester.system.entity.TestApi;
@@ -49,20 +49,29 @@ public class CucumberService {
         featureContentList.add("Feature: " + testCase.getName());
         featureContentList.add("");
         StringBuilder tagBuilder = new StringBuilder("    ");
-        tagBuilder.append(ETag.TEST_CASE_ID.tag()).append(Const.DASH).append(caseId).append(Const.SPACE);
+        if (StrUtil.isNotBlank(testCase.getPrepareDataSql())) {
+            tagBuilder.append(ETag.PREPARE_DATA.tag()).append(Const.SPACE);
+        }
         tagBuilder.append(ETag.TRANSACTIONAL.tag()).append(Const.SPACE);
-        if(testApi.getTransactionRollback()){
+        if (testApi.getTransactionRollback()) {
             tagBuilder.append(ETag.ROLLBACK.tag()).append(Const.SPACE);
         } else {
             tagBuilder.append(ETag.COMMIT.tag()).append(Const.SPACE);
         }
-        tagBuilder.append(ETag.END.tag());
         featureContentList.add(tagBuilder.toString());
-        featureContentList.add("    Scenario: " + testCase.getDescription());
-        stepAssertList.forEach(testStep -> featureContentList.add("        " + testStep.getStep().getFeatureLine()));
+        featureContentList.add("    Scenario Outline: " + testCase.getDescription());
+        stepAssertList.forEach(testStep -> featureContentList.add("        " + testStep.getStep().getFeatureLine() + " <testCaseId>"));
+        featureContentList.add("");
+        featureContentList.add("        Examples:");
+        featureContentList.add("            |testCaseId|");
+        featureContentList.add("            |" + caseId + "|");
 
-        // TODO 保存feature内容到数据库，便于问题排查
-        log.debug("Feature content: {}", JSONObject.toJSONString(featureContentList));
+        String featureContent = CucumberUtils.buildFeatureContent(featureContentList);
+        log.debug("Feature content: \n{}", featureContent);
+        TestCase testCaseUpdate = new TestCase();
+        testCaseUpdate.setId(caseId);
+        testCaseUpdate.setFeature(featureContent);
+        testCaseService.updateById(testCaseUpdate);
 
         File feature = FileUtil.file(CucumberUtils.CUCUMBER_FEATURE_TMP_PATH + caseId + File.separatorChar + "case_" + caseId + ".feature");
         FileUtil.mkdir(feature.getParentFile());

@@ -3,7 +3,7 @@ package com.mengweijin.tester;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.mengweijin"})
 public class TesterApplication {
 
 	public static void main(String[] args) {

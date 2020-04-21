@@ -26,8 +26,8 @@ public class TestCaseServiceImpl extends ServiceImpl<TestCaseMapper, TestCase> i
     private AsyncFactory asyncFactory;
 
     @Override
-    public String selectDatasourceName(Long caseId) {
-        return testCaseMapper.selectDatasourceName(caseId);
+    public String selectDataSourceName(Long caseId) {
+        return testCaseMapper.selectDataSourceName(caseId);
     }
 
     @Override

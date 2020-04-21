@@ -1,7 +1,7 @@
 package com.mengweijin.tester.system.mapper;
 
-import com.mengweijin.tester.system.entity.TestCase;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.mengweijin.tester.system.entity.TestCase;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -15,5 +15,5 @@ import org.apache.ibatis.annotations.Mapper;
  @Mapper
 public interface TestCaseMapper extends BaseMapper<TestCase> {
 
-     String selectDatasourceName(Long caseId);
+    String selectDataSourceName(Long caseId);
 }

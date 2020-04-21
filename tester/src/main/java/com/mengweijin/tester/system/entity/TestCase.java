@@ -1,6 +1,10 @@
 package com.mengweijin.tester.system.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.mengweijin.mwjwork.mybatis.BaseEntity;
 import com.mengweijin.tester.cucumber.enums.ECaseStatus;
 import lombok.Data;
@@ -22,6 +26,14 @@ import lombok.experimental.Accessors;
 public class TestCase extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     * 自动生成主键
+     * JsonSerialize：JavaScript 无法处理 Java 的长整型 Long 导致精度丢失，具体表现为主键最后两位永远为 0
+     */
+    @JsonSerialize(using = ToStringSerializer.class)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    protected Long id;
 
     /**
      * Test case code, Associate TEST STEP ASSERT when excel import
@@ -67,6 +79,11 @@ public class TestCase extends BaseEntity {
      * ECaseStatus enum.
      */
     private ECaseStatus status;
+
+    /**
+     * feature file
+     */
+    private String feature;
 
     /**
      * test case failed message.

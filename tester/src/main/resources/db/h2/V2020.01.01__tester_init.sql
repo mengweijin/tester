@@ -20,7 +20,7 @@ CREATE TABLE AT_DATA_SOURCE_INFO (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Data source info';
 
-INSERT INTO AT_DATA_SOURCE_INFO VALUES(1, 'h2', 'jdbc:h2:file:./h2/test;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL', 'sa', null, 'true', 'false', 'true', 'debug', 0, 1, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
+INSERT INTO AT_DATA_SOURCE_INFO VALUES(1, 'h2', 'jdbc:h2:file:C:/Users/mengweijin/Desktop/video-downloader/h2/test;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL', 'sa', null, 'true', 'false', 'true', 'debug', 0, 1, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
 
 
 
@@ -73,6 +73,7 @@ CREATE TABLE AT_TEST_CASE (
   request_method varchar(10) NOT NULL COMMENT 'HTTP request method: GET/POST/PUT/DELETE',
   request_params text NULL COMMENT 'request parameters JSON string',
   status varchar(20) NOT NULL DEFAULT 'WAITING' COMMENT 'ECaseStatus enum.',
+  feature text NULL COMMENT 'feature file',
   failed_message text NULL COMMENT 'test case failed message.',
   deleted int(4) DEFAULT 0 COMMENT 'Logic delete,（0 no delete; 1 deleted）',
   version bigint(11) DEFAULT 1 COMMENT 'Optimistic Lock',
@@ -83,8 +84,8 @@ CREATE TABLE AT_TEST_CASE (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='test case';
 
-INSERT INTO AT_TEST_CASE VALUES(1, 'CODE 001', 'Happy Path', 'Happy Path Description', 1, null, 'http://localhost:8081/video-downloader/task/{id}', 'GET', '{"id": 20200414225648970}', 'WAITING', 0, 1, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
-INSERT INTO AT_TEST_CASE VALUES(2, 'CODE 002', 'Empty response', 'Empty response Description', 1, null, 'http://localhost:8081/video-downloader/task/{id}', 'GET', '{"id": 10000000000000000}', 'WAITING', 0, 1, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
+INSERT INTO AT_TEST_CASE VALUES(1, 'CODE 001', 'Happy Path', 'Happy Path Description', 1, null, 'http://localhost:8081/video-downloader/task/{id}', 'GET', '{"id": 20200414225648970}', 'WAITING', null, null, 0, 1, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
+INSERT INTO AT_TEST_CASE VALUES(2, 'CODE 002', 'Empty response', 'Empty response Description', 1, null, 'http://localhost:8081/video-downloader/task/{id}', 'GET', '{"id": 10000000000000000}', 'WAITING', null, null, 0, 1, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
 
 
 
@@ -102,13 +103,13 @@ CREATE TABLE AT_TEST_STEP (
                                         THEN_ASSERT_RESPONSE_JSON_PATH: JSON path in response body.
                                         ASSERT_RESPONSE:                keep empty.
                                         ASSERT_DB_DATA:                 write assert query SQL. If include a date type, please format it in SQL.',
-  expect_value varchar(500) NULL COMMENT 'GIVEN_TOKEN:                    keep empty.
-                                            GIVEN_HTTP_HEADER:              keep empty.
-                                            WHEN_CALL_API:                  keep empty.
-                                            ASSERT_HTTP_CODE:               200;400;404;等
-                                            THEN_ASSERT_RESPONSE_JSON_PATH: JSON path的JSON vaule.
-                                            ASSERT_RESPONSE:                完整的response body.
-                                            ASSERT_DB_DATA:                 []括起来的sql查询结果',
+  expect_value text NULL COMMENT 'GIVEN_TOKEN:                    keep empty.
+                                 GIVEN_HTTP_HEADER:              keep empty.
+                                 WHEN_CALL_API:                  keep empty.
+                                 ASSERT_HTTP_CODE:               200;400;404;等
+                                 THEN_ASSERT_RESPONSE_JSON_PATH: JSON path的JSON vaule.
+                                 ASSERT_RESPONSE:                完整的response body.
+                                 ASSERT_DB_DATA:                 []括起来的sql查询结果',
   deleted int(4) DEFAULT 0 COMMENT 'Logic delete,（0 no delete; 1 deleted）',
   version bigint(11) DEFAULT 1 COMMENT 'Optimistic Lock',
   create_by varchar(64) NULL COMMENT 'Creator',

@@ -1,7 +1,7 @@
 package com.mengweijin.tester.system.service;
 
-import com.mengweijin.tester.system.entity.TestCase;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.mengweijin.tester.system.entity.TestCase;
 
 /**
  * <p>
@@ -13,7 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface TestCaseService extends IService<TestCase> {
 
-    String selectDatasourceName(Long caseId);
+    String selectDataSourceName(Long caseId);
 
     void runCase(Long caseId);
 }
