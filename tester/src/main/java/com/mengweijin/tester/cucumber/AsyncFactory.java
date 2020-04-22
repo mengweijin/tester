@@ -1,16 +1,12 @@
-package com.mengweijin.tester.cucumber.async;
+package com.mengweijin.tester.cucumber;
 
 import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.db.Session;
-import cn.hutool.db.ds.DSFactory;
 import com.mengweijin.mwjwork.framework.constant.Const;
 import com.mengweijin.mwjwork.framework.util.SpringUtils;
-import com.mengweijin.tester.cucumber.CucumberService;
-import com.mengweijin.tester.cucumber.CucumberUtils;
-import com.mengweijin.tester.cucumber.ScenarioThreadLocal;
 import com.mengweijin.tester.cucumber.entity.StepVariable;
 import com.mengweijin.tester.cucumber.enums.ECaseStatus;
+import com.mengweijin.tester.cucumber.util.CucumberUtils;
+import com.mengweijin.tester.cucumber.util.ScenarioThreadLocal;
 import com.mengweijin.tester.system.entity.TestCase;
 import com.mengweijin.tester.system.service.TestCaseService;
 import lombok.extern.slf4j.Slf4j;
@@ -33,19 +29,13 @@ public class AsyncFactory {
         TestCaseService testCaseService = SpringUtils.getBean(TestCaseService.class);
         CucumberService cucumberService = SpringUtils.getBean(CucumberService.class);
 
-        TestCase testCase = new TestCase();
-        testCase.setId(caseId);
+        TestCase testCase = new TestCase().setId(caseId);
+        // 执行中
+        testCase.setStatus(ECaseStatus.RUNNING);
+        testCaseService.updateById(testCase);
         File feature = null;
         try {
-            String dataSourceName = testCaseService.selectDataSourceName(caseId);
-            StepVariable stepVariable = new StepVariable();
-            stepVariable.setCaseId(caseId);
-            if (StrUtil.isNotEmpty(dataSourceName)) {
-                Session session = Session.create(DSFactory.get(dataSourceName));
-                stepVariable.setSession(session);
-            }
-            ScenarioThreadLocal.set(stepVariable);
-
+            ScenarioThreadLocal.set(new StepVariable().setCaseId(caseId));
             feature = cucumberService.generateCaseFeature(caseId);
             CucumberUtils.runCucumber(feature);
         } catch (Throwable throwable) {

@@ -1,6 +1,5 @@
-package com.mengweijin.tester.cucumber;
+package com.mengweijin.tester.cucumber.util;
 
-import cn.hutool.db.Session;
 import com.mengweijin.tester.cucumber.entity.StepVariable;
 
 /**

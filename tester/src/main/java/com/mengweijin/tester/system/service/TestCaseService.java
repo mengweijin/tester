@@ -13,7 +13,5 @@ import com.mengweijin.tester.system.entity.TestCase;
  */
 public interface TestCaseService extends IService<TestCase> {
 
-    String selectDataSourceName(Long caseId);
-
     void runCase(Long caseId);
 }

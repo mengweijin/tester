@@ -1,8 +1,8 @@
 package com.mengweijin.tester.cucumber.step;
 
-import com.mengweijin.tester.cucumber.ScenarioThreadLocal;
 import com.mengweijin.tester.cucumber.entity.StepVariable;
 import com.mengweijin.tester.cucumber.enums.EStep;
+import com.mengweijin.tester.cucumber.util.ScenarioThreadLocal;
 import io.cucumber.java8.En;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;

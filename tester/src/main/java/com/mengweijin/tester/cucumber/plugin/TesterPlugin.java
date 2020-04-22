@@ -1,7 +1,8 @@
-package com.mengweijin.tester.cucumber;
+package com.mengweijin.tester.cucumber.plugin;
 
 import com.mengweijin.mwjwork.framework.util.SpringUtils;
 import com.mengweijin.tester.cucumber.enums.ECaseStatus;
+import com.mengweijin.tester.cucumber.util.ScenarioThreadLocal;
 import com.mengweijin.tester.system.entity.TestCase;
 import com.mengweijin.tester.system.service.TestCaseService;
 import io.cucumber.plugin.EventListener;
@@ -10,15 +11,10 @@ import io.cucumber.plugin.event.Result;
 import io.cucumber.plugin.event.Status;
 import io.cucumber.plugin.event.TestCaseFinished;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author mengweijin
  */
 public class TesterPlugin implements EventListener {
-
-    private Map<String, Object> currentStepOrHookMap = new HashMap<>();
 
     @Override
     public void setEventPublisher(EventPublisher publisher) {

@@ -1,7 +1,7 @@
 package com.mengweijin.tester.system.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.mengweijin.tester.cucumber.async.AsyncFactory;
+import com.mengweijin.tester.cucumber.AsyncFactory;
 import com.mengweijin.tester.system.entity.TestApi;
 import com.mengweijin.tester.system.entity.TestCase;
 import com.mengweijin.tester.system.mapper.TestApiMapper;

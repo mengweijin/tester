@@ -61,6 +61,11 @@ public class TestCase extends BaseEntity {
     private String prepareDataSql;
 
     /**
+     * clear data SQLs
+     */
+    private String clearDataSql;
+
+    /**
      * request url
      */
     private String requestUrl;

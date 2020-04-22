@@ -1,4 +1,4 @@
-package com.mengweijin.tester.cucumber;
+package com.mengweijin.tester.cucumber.util;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.io.FileUtil;
@@ -41,7 +41,7 @@ public class CucumberUtils {
         //cucumberOptionsList.add("json:" + jsonReportFile.getAbsolutePath());
         // 自定义插件
         cucumberOptionsList.add("--plugin");
-        cucumberOptionsList.add("com.mengweijin.tester.cucumber.TesterPlugin");
+        cucumberOptionsList.add("com.mengweijin.tester.cucumber.plugin.TesterPlugin");
         String[] argv = cucumberOptionsList.toArray(new String[0]);
         byte status = Main.run(argv, Thread.currentThread().getContextClassLoader());
         return status;

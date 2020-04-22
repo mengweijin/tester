@@ -1,7 +1,7 @@
 package com.mengweijin.tester.system.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.mengweijin.tester.cucumber.async.AsyncFactory;
+import com.mengweijin.tester.cucumber.AsyncFactory;
 import com.mengweijin.tester.system.entity.TestCase;
 import com.mengweijin.tester.system.mapper.TestCaseMapper;
 import com.mengweijin.tester.system.service.TestCaseService;
@@ -24,11 +24,6 @@ public class TestCaseServiceImpl extends ServiceImpl<TestCaseMapper, TestCase> i
 
     @Autowired
     private AsyncFactory asyncFactory;
-
-    @Override
-    public String selectDataSourceName(Long caseId) {
-        return testCaseMapper.selectDataSourceName(caseId);
-    }
 
     @Override
     public void runCase(Long caseId) {

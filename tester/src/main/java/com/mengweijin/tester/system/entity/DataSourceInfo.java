@@ -3,6 +3,7 @@ package com.mengweijin.tester.system.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.Version;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.mengweijin.mwjwork.mybatis.BaseEntity;
@@ -74,4 +75,9 @@ public class DataSourceInfo extends BaseEntity {
      */
     private String sqlLevel;
 
+    /**
+     * 乐观锁
+     */
+    @Version
+    protected Long version;
 }

@@ -7,10 +7,9 @@ import java.io.Serializable;
 public enum ETag implements IEnum {
 
     TOKEN("@Token"),
-    TRANSACTIONAL("@Transactional"),
-    ROLLBACK("@Rollback"),
-    COMMIT("@Commit"),
-    PREPARE_DATA("@PrepareData");
+    DATA_SOURCE("@DataSource"),
+    PREPARE_DATA("@PrepareData"),
+    RESTORE_DATA("@RestoreData");
 
     private String tag;
 
