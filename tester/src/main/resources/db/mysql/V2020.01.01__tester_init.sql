@@ -7,12 +7,8 @@ create TABLE AT_DATA_SOURCE_INFO (
   url varchar(200) NOT NULL COMMENT 'jdbc url',
   username varchar(60) NOT NULL COMMENT 'Database username',
   password varchar(60) DEFAULT NULL COMMENT 'Database password',
-  show_sql varchar(5) NOT NULL DEFAULT 'true' COMMENT 'true/false',
-  format_sql varchar(5) NOT NULL DEFAULT 'false' COMMENT 'true/false',
-  show_params varchar(5) NOT NULL DEFAULT 'true' COMMENT 'true/false',
-  sql_level varchar(10) NOT NULL DEFAULT 'debug' COMMENT 'debug/info/error/warn',
-  deleted int(4) DEFAULT 0 COMMENT 'Logic delete,（0 no delete; 1 deleted）',
   version bigint(11) DEFAULT 1 COMMENT 'Optimistic Lock',
+  deleted int(4) DEFAULT 0 COMMENT 'Logic delete,（0 no delete; 1 deleted）',
   create_by varchar(64) NULL COMMENT 'Creator',
   create_time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'creation time',
   update_by varchar(64) NULL COMMENT 'Revisor',
@@ -20,7 +16,7 @@ create TABLE AT_DATA_SOURCE_INFO (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Data source info';
 
-insert into AT_DATA_SOURCE_INFO values(1, 'h2', 'jdbc:h2:file:C:/Users/mengweijin/Desktop/video-downloader/h2/test;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL', 'sa', null, 'true', 'false', 'true', 'debug', 0, 1, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
+insert into AT_DATA_SOURCE_INFO values(1, 'mysql', 'jdbc:mysql://192.168.233.155:3306/tester?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false', 'root', 'root', 1, 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
 
 
 
@@ -46,18 +42,17 @@ create TABLE AT_TEST_API (
   id bigint NOT NULL COMMENT 'primary key id',
   url varchar(500) NULL COMMENT 'test api url',
   http_method varchar(10) NOT NULL COMMENT 'HTTP method: GET/POST/PUT/DELETE',
-  datasource_id bigint NULL COMMENT 'AT_DATASOURCE_INFO id',
+  data_source_id bigint NULL COMMENT 'AT_DATASOURCE_INFO id',
   project_id bigint NOT NULL COMMENT 'AT_TEST_PROJECT id',
-  transaction_rollback int(4) DEFAULT 1 COMMENT 'Enable database transaction rollback, （0 disable, auto commit; 1 enable, auto rollback）',
   deleted int(4) DEFAULT 0 COMMENT 'Logic delete,（0 no delete; 1 deleted）',
   create_by varchar(64) NULL COMMENT 'Creator',
   create_time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'creation time',
   update_by varchar(64) NULL COMMENT 'Revisor',
   update_time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON update CURRENT_TIMESTAMP COMMENT 'Revisor time',
   PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='test case';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='test api';
 
-insert into AT_TEST_API values(1, 'http://localhost:8081/video-downloader/task/{id}', 'GET', 1, 1, 1, 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
+insert into AT_TEST_API values(1, 'http://localhost:8080/system/testApi/{apiId}', 'GET', 1, 1, 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
 
 
 
@@ -69,9 +64,9 @@ create TABLE AT_TEST_CASE (
   description varchar(500) NOT NULL COMMENT 'test case description',
   api_id bigint NOT NULL COMMENT 'AT_TEST_API id',
   prepare_data_sql text NULL COMMENT 'prepare data SQLs',
-  clear_data_sql text NULL COMMENT 'clear data SQLs',
   request_url varchar(500) NOT NULL COMMENT 'request url',
-  request_method varchar(10) NOT NULL COMMENT 'HTTP request method: GET/POST/PUT/DELETE',
+  http_method varchar(10) NOT NULL COMMENT 'HTTP request method: GET/POST/PUT/DELETE',
+  url_params text NULL COMMENT 'url parameters JSON string',
   request_params text NULL COMMENT 'request parameters JSON string',
   status varchar(20) NOT NULL DEFAULT 'WAITING' COMMENT 'ECaseStatus enum.',
   feature text NULL COMMENT 'feature file',
@@ -84,8 +79,8 @@ create TABLE AT_TEST_CASE (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='test case';
 
-insert into AT_TEST_CASE values(1, 'CODE 001', 'Happy Path', 'Happy Path Description', 1, null, null, 'http://localhost:8081/video-downloader/task/{id}', 'GET', '{"id": 20200414225648970}', 'WAITING', null, null, 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
-insert into AT_TEST_CASE values(2, 'CODE 002', 'Empty response', 'Empty response Description', 1, null, null, 'http://localhost:8081/video-downloader/task/{id}', 'GET', '{"id": 10000000000000000}', 'WAITING', null, null, 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
+insert into AT_TEST_CASE values(1, 'CODE 001', 'Happy Path', 'Happy Path Description', 1, null, 'http://localhost:8080/system/testApi/{apiId}', 'GET', '{"apiId": 1}', '{"id": 1}', 'WAITING', null, null, 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
+insert into AT_TEST_CASE values(2, 'CODE 002', 'Empty response', 'Empty response Description', 1, null, 'http://localhost:8080/system/testApi/{apiId}', 'GET', '{"apiId": 1}', '{"id": 10000000000000000}', 'WAITING', null, null, 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
 
 
 
@@ -95,7 +90,7 @@ create TABLE AT_TEST_STEP (
   case_id bigint NOT NULL COMMENT 'AT_TEST_CASE id',
   case_code varchar(20) NULL COMMENT 'Test case code, Associate TEST STEP ASSERT when excel import',
   step varchar(30) NOT NULL COMMENT 'EStep enum. ',
-  index int(4) NOT NULL COMMENT 'The execution order of steps, generated by the program.',
+  default_index int(4) NOT NULL COMMENT 'The execution order of steps, generated by the program.',
   assert_key varchar(500) NULL COMMENT 'GIVEN_TOKEN:                    keep empty.
                                         GIVEN_HTTP_HEADER:              keep empty.
                                         WHEN_CALL_API:                  keep empty.
@@ -118,20 +113,30 @@ create TABLE AT_TEST_STEP (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='test step';
 
-insert into AT_TEST_STEP values(1, 1, 'CODE 001', 'WHEN_CALL_API', 1, null, null, 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
-insert into AT_TEST_STEP values(2, 1, 'CODE 001', 'THEN_ASSERT_HTTP_CODE', 2, 'httpCode', '200', 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
-insert into AT_TEST_STEP values(3, 1, 'CODE 001', 'THEN_ASSERT_RESPONSE', 3, 'response',
+insert into AT_TEST_STEP values(1, 1, 'CODE 001', 'GIVEN_TOKEN', 1, null, null, 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
+insert into AT_TEST_STEP values(2, 1, 'CODE 001', 'GIVEN_HTTP_HEADER', 2, null, null, 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
+insert into AT_TEST_STEP values(3, 1, 'CODE 001', 'WHEN_CALL_API', 3, null, null, 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
+insert into AT_TEST_STEP values(4, 1, 'CODE 001', 'THEN_ASSERT_HTTP_CODE', 4, null, '200', 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
+insert into AT_TEST_STEP values(5, 1, 'CODE 001', 'THEN_ASSERT_RESPONSE', 5, null,
     '{
-                "id": "20200414225423341",
-                "createTime": "2020-04-14T22:54:23.341",
-                "updateTime": "2020-04-14T23:04:44.542",
-                "createBy": "admin",
-                "updateBy": "admin",
-                "deleted": 0,
-                "name": "",
-                "url": "http://www.gcwdp.com/zxgcw/142225.html",
-                "status": "FAILED",
-                "attachmentPath": null,
-                "attachmentName": null,
-                "errorMessage": "不支持当前视频源，请尝试打开原网页在视频上方点击右键另存为下载视频。"
+        "createTime": "2020-01-01T00:00:00",
+        "createBy": "system",
+        "updateTime": "2020-01-01T00:00:00",
+        "updateBy": "system",
+        "deleted": 0,
+        "id": "1",
+        "url": "http://localhost:8080/system/testApi/{apiId}",
+        "httpMethod": "GET",
+        "dataSourceId": 1,
+        "projectId": 1
     }', 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
+insert into AT_TEST_STEP values(6, 1, 'CODE 001', 'THEN_ASSERT_RESPONSE_JSON_PATH', 6, '$.id;$.url;',
+    '{
+        "$.id": "1",
+        "$.url": "http://localhost:8080/system/testApi/{apiId}"
+    }', 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
+insert into AT_TEST_STEP values(7, 1, 'CODE 001', 'THEN_ASSERT_DB_DATA', 7, 'select id, url from AT_TEST_API where id=1;',
+    '[{
+        "id": "1",
+        "url": "http://localhost:8080/system/testApi/{apiId}"
+    }]', 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');

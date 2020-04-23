@@ -1,6 +1,8 @@
 package com.mengweijin.tester.system.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -10,6 +12,7 @@ import com.mengweijin.tester.cucumber.enums.ECaseStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.http.HttpMethod;
 
 /**
  * <p>
@@ -61,11 +64,6 @@ public class TestCase extends BaseEntity {
     private String prepareDataSql;
 
     /**
-     * clear data SQLs
-     */
-    private String clearDataSql;
-
-    /**
      * request url
      */
     private String requestUrl;
@@ -73,7 +71,12 @@ public class TestCase extends BaseEntity {
     /**
      * HTTP request method: GET/POST/PUT/DELETE
      */
-    private String requestMethod;
+    private HttpMethod httpMethod;
+
+    /**
+     * url parameters JSON string
+     */
+    private String urlParams;
 
     /**
      * request parameters JSON string
@@ -93,6 +96,7 @@ public class TestCase extends BaseEntity {
     /**
      * test case failed message.
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String failedMessage;
 
 }

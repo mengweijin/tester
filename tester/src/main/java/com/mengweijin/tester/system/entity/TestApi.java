@@ -9,6 +9,7 @@ import com.mengweijin.mwjwork.mybatis.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.http.HttpMethod;
 
 /**
  * <p>
@@ -42,21 +43,16 @@ public class TestApi extends BaseEntity {
     /**
      * HTTP method: GET/POST/PUT/DELETE
      */
-    private String httpMethod;
+    private HttpMethod httpMethod;
 
     /**
-     * AT_DATASOURCE_INFO id
+     * AT_DATA_SOURCE_INFO id
      */
-    private Long datasourceId;
+    private Long dataSourceId;
 
     /**
      * AT_TEST_PROJECT id
      */
     private Long projectId;
-
-    /**
-     * Enable database transaction rollback, （0 disable, auto commit; 1 enable, auto rollback）
-     */
-    private Boolean transactionRollback;
 
 }

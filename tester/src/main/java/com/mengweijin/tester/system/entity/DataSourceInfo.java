@@ -56,26 +56,6 @@ public class DataSourceInfo extends BaseEntity {
     private String password;
 
     /**
-     * true/false
-     */
-    private String showSql;
-
-    /**
-     * true/false
-     */
-    private String formatSql;
-
-    /**
-     * true/false
-     */
-    private String showParams;
-
-    /**
-     * debug/info/error/warn
-     */
-    private String sqlLevel;
-
-    /**
      * 乐观锁
      */
     @Version

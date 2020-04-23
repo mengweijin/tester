@@ -49,20 +49,6 @@ public class DatabaseHooks implements En {
             }
         });
 
-        /**
-         * Restore data after each scenario when has @RestoreData
-         */
-        After(ETag.RESTORE_DATA.tag(), 1, (scenario) -> {
-            Long testCaseId = ScenarioThreadLocal.get().getCaseId();
-            TestCaseService testCaseService = SpringUtils.getBean(TestCaseService.class);
-            TestCase testCase = testCaseService.getById(testCaseId);
-            String sqls = testCase.getClearDataSql();
-            if (StrUtil.isNotBlank(sqls)) {
-                String[] sqlArray = sqls.split(Const.SEMICOLON);
-                JdbcTemplate jdbcTemplate = ScenarioThreadLocal.get().getJdbcTemplate();
-                jdbcTemplate.batchUpdate(sqlArray);
-            }
-        });
     }
 
 }

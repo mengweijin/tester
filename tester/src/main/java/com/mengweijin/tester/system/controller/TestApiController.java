@@ -1,5 +1,6 @@
 package com.mengweijin.tester.system.controller;
 
+import com.mengweijin.tester.system.entity.TestApi;
 import com.mengweijin.tester.system.service.TestApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +24,12 @@ public class TestApiController {
     private TestApiService testApiService;
 
     @GetMapping("/{apiId}")
-    public void runApiCase(@PathVariable Long apiId){
+    public TestApi getApiCase(@PathVariable Long apiId) {
+        return testApiService.getById(apiId);
+    }
+
+    @GetMapping("/run/{apiId}")
+    public void runApiCase(@PathVariable Long apiId) {
         testApiService.runApiCase(apiId);
     }
 

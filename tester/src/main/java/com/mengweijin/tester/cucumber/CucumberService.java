@@ -49,7 +49,7 @@ public class CucumberService {
     public DataSource getDataSource(Long caseId) {
         TestCase testCase = testCaseService.getById(caseId);
         TestApi testApi = testApiService.getById(testCase.getApiId());
-        DataSourceInfo dataSourceInfo = dataSourceInfoService.getById(testApi.getDatasourceId());
+        DataSourceInfo dataSourceInfo = dataSourceInfoService.getById(testApi.getDataSourceId());
         return new DriverManagerDataSource(
                 dataSourceInfo.getUrl(),
                 dataSourceInfo.getUsername(),
@@ -68,24 +68,21 @@ public class CucumberService {
 
         List<TestStep> stepAssertList = testStepService.lambdaQuery()
                 .eq(TestStep::getCaseId, caseId)
-                .orderByAsc(TestStep::getIndex)
+                .orderByAsc(TestStep::getDefaultIndex)
                 .list();
         List<String> featureContentList = new ArrayList<>(stepAssertList.size() + 4);
         featureContentList.add("Feature: " + testCase.getName());
         featureContentList.add("");
         StringBuilder tagBuilder = new StringBuilder("    ");
-        if (testApi.getDatasourceId() != null) {
+        if (testApi.getDataSourceId() != null) {
             tagBuilder.append(ETag.DATA_SOURCE.tag()).append(Const.SPACE);
         }
         if (StrUtil.isNotBlank(testCase.getPrepareDataSql())) {
             tagBuilder.append(ETag.PREPARE_DATA.tag()).append(Const.SPACE);
         }
-        if (StrUtil.isNotBlank(testCase.getClearDataSql())) {
-            tagBuilder.append(ETag.RESTORE_DATA.tag()).append(Const.SPACE);
-        }
         featureContentList.add(tagBuilder.toString());
         featureContentList.add("    Scenario Outline: " + testCase.getDescription());
-        stepAssertList.forEach(testStep -> featureContentList.add("        " + testStep.getStep().getFeatureLine() + " <testCaseId>"));
+        stepAssertList.forEach(testStep -> featureContentList.add("        " + testStep.getStep().getFeatureLine() + " <testCaseId> " + testStep.getId()));
         featureContentList.add("");
         featureContentList.add("        Examples:");
         featureContentList.add("            |testCaseId|");

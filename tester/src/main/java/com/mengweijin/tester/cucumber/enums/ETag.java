@@ -8,8 +8,7 @@ public enum ETag implements IEnum {
 
     TOKEN("@Token"),
     DATA_SOURCE("@DataSource"),
-    PREPARE_DATA("@PrepareData"),
-    RESTORE_DATA("@RestoreData");
+    PREPARE_DATA("@PrepareData");
 
     private String tag;
 
