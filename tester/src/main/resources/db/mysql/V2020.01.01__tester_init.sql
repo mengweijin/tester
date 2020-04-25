@@ -63,7 +63,7 @@ create TABLE AT_TEST_CASE (
   name varchar(100) NOT NULL COMMENT 'test case name',
   description varchar(500) NOT NULL COMMENT 'test case description',
   api_id bigint NOT NULL COMMENT 'AT_TEST_API id',
-  prepare_data_sql text NULL COMMENT 'prepare data SQLs',
+  prepared_data_sql text NULL COMMENT 'prepared data SQLs',
   request_url varchar(500) NOT NULL COMMENT 'request url',
   http_method varchar(10) NOT NULL COMMENT 'HTTP request method: GET/POST/PUT/DELETE',
   url_params text NULL COMMENT 'url parameters JSON string',

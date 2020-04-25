@@ -3,9 +3,9 @@ package com.mengweijin.tester.cucumber.step;
 import cn.hutool.core.util.StrUtil;
 import com.mengweijin.mwjwork.framework.constant.Const;
 import com.mengweijin.mwjwork.framework.util.SpringUtils;
-import com.mengweijin.tester.cucumber.CucumberService;
 import com.mengweijin.tester.cucumber.entity.StepVariable;
 import com.mengweijin.tester.cucumber.enums.ETag;
+import com.mengweijin.tester.cucumber.service.CucumberService;
 import com.mengweijin.tester.cucumber.util.ScenarioThreadLocal;
 import com.mengweijin.tester.system.entity.TestCase;
 import com.mengweijin.tester.system.service.TestCaseService;
@@ -41,7 +41,7 @@ public class DatabaseHooks implements En {
             Long testCaseId = ScenarioThreadLocal.get().getCaseId();
             TestCaseService testCaseService = SpringUtils.getBean(TestCaseService.class);
             TestCase testCase = testCaseService.getById(testCaseId);
-            String sqls = testCase.getPrepareDataSql();
+            String sqls = testCase.getPreparedDataSql();
             if (StrUtil.isNotBlank(sqls)) {
                 String[] sqlArray = sqls.split(Const.SEMICOLON);
                 JdbcTemplate jdbcTemplate = ScenarioThreadLocal.get().getJdbcTemplate();

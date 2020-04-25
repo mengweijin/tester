@@ -59,9 +59,9 @@ public class TestCase extends BaseEntity {
     private Long apiId;
 
     /**
-     * prepare data SQLs
+     * prepared data SQLs
      */
-    private String prepareDataSql;
+    private String preparedDataSql;
 
     /**
      * request url

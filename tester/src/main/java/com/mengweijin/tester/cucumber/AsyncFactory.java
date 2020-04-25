@@ -5,6 +5,7 @@ import com.mengweijin.mwjwork.framework.constant.Const;
 import com.mengweijin.mwjwork.framework.util.SpringUtils;
 import com.mengweijin.tester.cucumber.entity.StepVariable;
 import com.mengweijin.tester.cucumber.enums.ECaseStatus;
+import com.mengweijin.tester.cucumber.service.CucumberService;
 import com.mengweijin.tester.cucumber.util.CucumberUtils;
 import com.mengweijin.tester.cucumber.util.ScenarioThreadLocal;
 import com.mengweijin.tester.system.entity.TestCase;
