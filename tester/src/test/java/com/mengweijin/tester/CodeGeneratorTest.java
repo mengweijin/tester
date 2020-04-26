@@ -24,7 +24,7 @@ public class CodeGeneratorTest {
         config.setSuperServiceClass(IService.class);
         config.setSuperServiceImplClass(ServiceImpl.class);
         config.setSuperControllerClass(BaseController.class);
-        config.setSuperEntityColumns(new String[]{"ID", "CREATE_BY", "CREATE_TIME", "UPDATE_BY", "UPDATE_TIME", "DELETED"});
+        config.setSuperEntityColumns(new String[]{"CREATE_BY", "CREATE_TIME", "UPDATE_BY", "UPDATE_TIME", "DELETED"});
         config.setDbUrl("jdbc:mysql://192.168.233.155:3306/tester?useUnicode=true&useSSL=false&characterEncoding=utf8");
         config.setDbDriverName("com.mysql.cj.jdbc.Driver");
         config.setDbUsername("root");
