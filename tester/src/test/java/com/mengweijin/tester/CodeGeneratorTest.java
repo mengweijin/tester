@@ -16,15 +16,15 @@ public class CodeGeneratorTest {
         ConfigProperty config = new ConfigProperty();
         config.setAuthor("Meng Wei Jin");
         config.setTemplateLocation("templates/mybatisplus/");
-        config.setPackagePath("com.mengweijin.test");
+        config.setPackagePath("com.mengweijin.aaaaaaaaaaaaaaaaaaaaaaaaa");
         config.setTables(new String[]{"AT_TEST_CASE", "AT_TEST_STEP"});
-        config.setTablePrefix("AT_");
+        config.setTablePrefix("");
         config.setSuperEntityClass(BaseEntity.class);
         config.setSuperDaoClass(BaseMapper.class);
         config.setSuperServiceClass(IService.class);
         config.setSuperServiceImplClass(ServiceImpl.class);
         config.setSuperControllerClass(BaseController.class);
-        config.setSuperEntityColumns(new String[]{"ID, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME, DELETED"});
+        config.setSuperEntityColumns(new String[]{"ID", "CREATE_BY", "CREATE_TIME", "UPDATE_BY", "UPDATE_TIME", "DELETED"});
         config.setDbUrl("jdbc:mysql://192.168.233.155:3306/tester?useUnicode=true&useSSL=false&characterEncoding=utf8");
         config.setDbDriverName("com.mysql.cj.jdbc.Driver");
         config.setDbUsername("root");
