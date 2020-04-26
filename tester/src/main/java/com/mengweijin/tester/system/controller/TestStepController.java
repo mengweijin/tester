@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,23 +34,32 @@ public class TestStepController {
     @Autowired
     private TestStepService testStepService;
 
+    /**
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     public TestStep getById(@Valid @Range @PathVariable("id") Long id) {
         return testStepService.getById(id);
     }
 
+    /**
+     * @param page
+     * @param testStep
+     * @return
+     */
     @GetMapping
     public IPage<TestStep> getPage(IPage<TestStep> page, @Valid TestStep testStep) {
         return testStepService.page(page, new QueryWrapper<>(testStep));
     }
 
     @PostMapping
-    public void add(@Valid TestStep testStep) {
+    public void add(@Valid @RequestBody TestStep testStep) {
         testStepService.save(testStep);
     }
 
     @PutMapping
-    public void update(@Valid TestStep testStep) {
+    public void update(@Valid @RequestBody TestStep testStep) {
         testStepService.updateById(testStep);
     }
 

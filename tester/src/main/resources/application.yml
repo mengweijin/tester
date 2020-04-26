@@ -1,12 +1,12 @@
 server:
-  port: 8080
+  port: 8090
   servlet:
     context-path: /
   tomcat:
     uri-encoding: UTF-8
 spring:
   profiles:
-    active: mysql
+    active: dev
   mvc:
     throw-exception-if-no-handler-found: true
   messages:

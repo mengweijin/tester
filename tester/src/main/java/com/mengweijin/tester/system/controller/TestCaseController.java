@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -49,12 +50,12 @@ public class TestCaseController {
     }
 
     @PostMapping
-    public void add(@Valid TestCase testCase) {
+    public void add(@Valid @RequestBody TestCase testCase) {
         testCaseService.save(testCase);
     }
 
     @PutMapping
-    public void update(@Valid TestCase testCase) {
+    public void update(@Valid @RequestBody TestCase testCase) {
         testCaseService.updateById(testCase);
     }
 
