@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from '@/layout/index'
+import AsideLayout from '@/layout/asideLayout'
 import MengweijinHeader from '@/layout/mengweijinHeader'
 import Header from '@/layout/header'
 import Footer from '@/layout/footer'
+import ProjectTree from '@/views/project/projectTree'
 
 /**
  * 重写路由的push方法
@@ -25,6 +27,22 @@ export const Routers = [{
             components: {
                 mengweijinHeader: MengweijinHeader,
                 header: Header,
+                default: () =>
+                    import ('@/views/index'),
+                footer: Footer
+            }
+        }]
+    },
+    {
+        path: '/test/case',
+        component: AsideLayout,
+        redirect: '/test/case/index',
+        children: [{
+            path: '/test/case/index',
+            components: {
+                mengweijinHeader: MengweijinHeader,
+                header: Header,
+                projectTree: ProjectTree,
                 default: () =>
                     import ('@/views/index'),
                 footer: Footer

@@ -4,9 +4,9 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  count: 0
+    headerHeight: undefined
 }
 
 export default new Vuex.Store({
-  state
+    state
 })

@@ -3,7 +3,6 @@
 import Vue from 'vue'
 import router from './router/index'
 import 'es6-promise/auto'
-import Vuex from 'vuex'
 import store from './store/index'
 import ElementUI from 'element-ui'
 import dayjs from 'dayjs'
@@ -18,7 +17,6 @@ import './assets/style/mengweijin.css'
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
-Vue.use(Vuex)
 
 Vue.prototype.$dayjs = dayjs
 Vue.prototype.$axios = axios

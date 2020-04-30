@@ -11,3 +11,26 @@
     </el-row> 
 </template>
 
+<script type="text/ecmascript-6">
+  export default {
+    data: function() {   
+      return {
+        
+      }
+    },
+    computed: {
+      
+    },
+    watch: {
+      
+    },
+    methods:{
+      
+    },
+    created: function() {
+    },
+    mounted () {
+
+    }
+  }
+</script>
