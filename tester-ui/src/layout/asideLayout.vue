@@ -9,8 +9,8 @@
       </el-header>
 
       <el-container :style="{height: scrollerHeight}">
-        <el-aside>
-          <router-view name="projectTree"/>
+        <el-aside width="30%">
+          <router-view name="aside"/>
         </el-aside>
 
         <el-main>

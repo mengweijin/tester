@@ -99,4 +99,9 @@ public class TestApiController {
     public void delete(@Valid @Range @PathVariable("id") Long id) {
         testApiService.removeById(id);
     }
+
+    @GetMapping("/{projectId}/api")
+    public List<TestApi> getTestCaseByProjectId(@Valid @Range @PathVariable("projectId") Long projectId){
+        return testApiService.lambdaQuery().eq(TestApi::getProjectId, projectId).orderByDesc(TestApi::getCreateTime).list();
+    }
 }

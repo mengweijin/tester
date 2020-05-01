@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * <p>
@@ -58,4 +59,10 @@ public class TestProjectController {
     public void delete(@Valid @Range @PathVariable("id") Long id) {
         testProjectService.removeById(id);
     }
+
+    @GetMapping("/list")
+    public List<TestProject> getProjectList() {
+        return testProjectService.list();
+    }
+
 }

@@ -5,7 +5,6 @@ import AsideLayout from '@/layout/asideLayout'
 import MengweijinHeader from '@/layout/mengweijinHeader'
 import Header from '@/layout/header'
 import Footer from '@/layout/footer'
-import ProjectTree from '@/views/project/projectTree'
 
 /**
  * 重写路由的push方法
@@ -42,9 +41,10 @@ export const Routers = [{
             components: {
                 mengweijinHeader: MengweijinHeader,
                 header: Header,
-                projectTree: ProjectTree,
+                aside: () =>
+                    import ('@/views/api/list'),
                 default: () =>
-                    import ('@/views/index'),
+                    import ('@/views/case/list'),
                 footer: Footer
             }
         }]
