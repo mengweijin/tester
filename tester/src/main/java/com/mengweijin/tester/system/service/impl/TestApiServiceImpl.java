@@ -1,6 +1,7 @@
 package com.mengweijin.tester.system.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mengweijin.tester.cucumber.AsyncFactory;
 import com.mengweijin.tester.cucumber.entity.TestCaseExcel;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -75,5 +77,10 @@ public class TestApiServiceImpl extends ServiceImpl<TestApiMapper, TestApi> impl
         testCaseExcel.setTestCaseSheetList(testCaseSheetList);
         testCaseExcel.setTestStepSheetList(testStepSheetList);
         return testCaseExcel;
+    }
+
+    @Override
+    public IPage<Map<String, Object>> selectPageVO(IPage<Map<String, Object>> page, TestApi testApi) {
+        return testApiMapper.selectPageVO(page, testApi);
     }
 }

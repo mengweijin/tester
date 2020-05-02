@@ -2,4 +2,54 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mengweijin.tester.system.mapper.TestApiMapper">
 
+    <select id="selectPageVO" resultType="java.util.Map">
+        select
+            t1.id,
+            t1.url,
+            t1.http_method,
+            t1.data_source_id,
+            t1.project_id,
+            t1.deleted,
+            t1.create_by,
+            t1.create_time,
+            t1.update_by,
+            t1.update_time,
+            t2.name as project_name,
+            t3.name as data_source_name
+        from AT_TEST_API t1
+        left join AT_TEST_PROJECT t2 on t1.project_id = t2.id
+        left join AT_DATA_SOURCE_INFO t3 on t1. data_source_id = t3.id
+        <where>
+            <if test="testApi.id != null">
+                and t1.id = #{id}
+            </if>
+            <if test="testApi.url != null and testApi.url != ''">
+                and t1.url = #{url}
+            </if>
+            <if test="testApi.httpMethod != null and testApi.httpMethod != ''">
+                and t1.http_method = #{httpMethod}
+            </if>
+            <if test="testApi.dataSourceId != null">
+                and t1.data_source_id = #{dataSourceId}
+            </if>
+            <if test="testApi.projectId != null">
+                and t1.project_id = #{projectId}
+            </if>
+            <if test="testApi.deleted != null">
+                and t1.deleted = #{deleted}
+            </if>
+            <if test="testApi.createBy != null and testApi.createBy != ''">
+                and t1.create_by = #{createBy}
+            </if>
+            <if test="testApi.createTime != null">
+                and t1.create_time = #{createTime}
+            </if>
+            <if test="testApi.updateBy != null and testApi.updateBy != ''">
+                and t1.update_by = #{updateBy}
+            </if>
+            <if test="testApi.updateTime != null">
+                and t1.update_time = #{updateTime}
+            </if>
+        </where>
+    </select>
 </mapper>

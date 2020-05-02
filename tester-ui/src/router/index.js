@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from '@/layout/index'
-import AsideLayout from '@/layout/asideLayout'
 import MengweijinHeader from '@/layout/mengweijinHeader'
 import Header from '@/layout/header'
 import Footer from '@/layout/footer'
@@ -22,32 +21,36 @@ export const Routers = [{
         component: Layout,
         redirect: '/index',
         children: [{
-            path: '/index',
-            components: {
-                mengweijinHeader: MengweijinHeader,
-                header: Header,
-                default: () =>
-                    import ('@/views/index'),
-                footer: Footer
+                path: '/index',
+                components: {
+                    mengweijinHeader: MengweijinHeader,
+                    header: Header,
+                    default: () =>
+                        import ('@/views/index'),
+                    footer: Footer
+                }
+            },
+            {
+                path: '/test/project',
+                components: {
+                    mengweijinHeader: MengweijinHeader,
+                    header: Header,
+                    default: () =>
+                        import ('@/views/project/index'),
+                    footer: Footer
+                }
+            },
+            {
+                path: '/test/api',
+                components: {
+                    mengweijinHeader: MengweijinHeader,
+                    header: Header,
+                    default: () =>
+                        import ('@/views/api/index'),
+                    footer: Footer
+                }
             }
-        }]
-    },
-    {
-        path: '/test/case',
-        component: AsideLayout,
-        redirect: '/test/case/index',
-        children: [{
-            path: '/test/case/index',
-            components: {
-                mengweijinHeader: MengweijinHeader,
-                header: Header,
-                aside: () =>
-                    import ('@/views/api/list'),
-                default: () =>
-                    import ('@/views/case/list'),
-                footer: Footer
-            }
-        }]
+        ]
     },
     {
         path: '/404',

@@ -1,6 +1,5 @@
 package com.mengweijin.tester.system.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.mengweijin.mwjwork.framework.exception.ServerException;
 import com.mengweijin.mwjwork.framework.util.UploadUtils;
@@ -30,6 +29,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -81,8 +81,8 @@ public class TestApiController {
     }
 
     @GetMapping
-    public IPage<TestApi> getPage(IPage<TestApi> page, @Valid TestApi testApi) {
-        return testApiService.page(page, new QueryWrapper<>(testApi));
+    public IPage<Map<String, Object>> selectPageVO(IPage<Map<String, Object>> page, @Valid TestApi testApi) {
+        return testApiService.selectPageVO(page, testApi);
     }
 
     @PostMapping
@@ -100,8 +100,4 @@ public class TestApiController {
         testApiService.removeById(id);
     }
 
-    @GetMapping("/{projectId}/api")
-    public List<TestApi> getTestCaseByProjectId(@Valid @Range @PathVariable("projectId") Long projectId){
-        return testApiService.lambdaQuery().eq(TestApi::getProjectId, projectId).orderByDesc(TestApi::getCreateTime).list();
-    }
 }

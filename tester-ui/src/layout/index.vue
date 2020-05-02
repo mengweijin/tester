@@ -8,7 +8,7 @@
         <router-view name="header"/>
       </el-header>
 
-      <el-main style="margin-bottom: 60px">
+      <el-main :style="{height: scrollerHeight}" style="width: 90%; margin: 0 auto;">
         <router-view/>
       </el-main>
 
@@ -24,16 +24,23 @@
   export default {
     data: function() {   
       return {
-        
+        scrollerHeight: (window.innerHeight - 90 - 60 - 60 - 20) + 'px'
       }
     },
     watch: {
       
     },
     methods:{
-      
+      // 滚动区高度
+      calcScrollerHeight: function() {
+        this.scrollerHeight = (window.innerHeight - document.getElementById('header').offsetHeight - 60 - 60 - 20) + 'px';
+      }
     },
     created: function() {
+    },
+    mounted () {
+      let _this = this;
+      window.onresize = () => _this.calcScrollerHeight()
     }
   }
 </script>

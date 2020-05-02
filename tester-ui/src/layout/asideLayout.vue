@@ -9,11 +9,11 @@
       </el-header>
 
       <el-container :style="{height: scrollerHeight}">
-        <el-aside width="30%">
+        <el-aside width="36%" class="mwj-border">
           <router-view name="aside"/>
         </el-aside>
 
-        <el-main>
+        <el-main class="mwj-border">
           <router-view/>
         </el-main>
       </el-container>

@@ -15,9 +15,9 @@ public class CodeGeneratorTest {
     void codeGenerator() {
         ConfigProperty config = new ConfigProperty();
         config.setAuthor("Meng Wei Jin");
-        config.setTemplateLocation("templates/mybatisplus/");
+        config.setTemplateLocation("templates/mybatis/");
         config.setPackagePath("com.mengweijin.aaaaaaaaaaaaaaaaaaaaaaaaa");
-        config.setTables(new String[]{"AT_TEST_CASE", "AT_TEST_STEP"});
+        config.setTables(new String[]{"AT_TEST_API"});
         config.setTablePrefix("");
         config.setSuperEntityClass(BaseEntity.class);
         config.setSuperDaoClass(BaseMapper.class);

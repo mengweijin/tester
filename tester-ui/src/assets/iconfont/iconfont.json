@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "9223509",
+      "name": "export",
+      "font_class": "export",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "9223517",
+      "name": "import",
+      "font_class": "import",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "228875",
+      "name": "detail",
+      "font_class": "detail",
+      "unicode": "e66c",
+      "unicode_decimal": 58988
+    },
+    {
       "icon_id": "15353",
       "name": "主页",
       "font_class": "zhuye",
