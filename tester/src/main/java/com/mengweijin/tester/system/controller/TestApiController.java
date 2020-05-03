@@ -7,6 +7,7 @@ import com.mengweijin.tester.cucumber.entity.TestCaseExcel;
 import com.mengweijin.tester.cucumber.util.TestCaseExcelUtils;
 import com.mengweijin.tester.system.entity.TestApi;
 import com.mengweijin.tester.system.service.TestApiService;
+import com.mengweijin.tester.system.vo.TestApiVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.connector.ClientAbortException;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -29,7 +30,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -59,7 +59,7 @@ public class TestApiController {
         testApiService.importCaseFromExcel(apiId, fileList);
     }
 
-    @PostMapping("/export/{apiId}/case")
+    @GetMapping("/export/{apiId}/case")
     public void exportCaseToExcel(@PathVariable Long apiId, HttpServletResponse response) {
         TestCaseExcel testCaseExcel = testApiService.getTestCaseExcel(apiId);
         Workbook workbook = TestCaseExcelUtils.exportTestCaseToExcel(testCaseExcel);
@@ -81,7 +81,7 @@ public class TestApiController {
     }
 
     @GetMapping
-    public IPage<Map<String, Object>> selectPageVO(IPage<Map<String, Object>> page, @Valid TestApi testApi) {
+    public IPage<TestApiVO> selectPageVO(IPage<TestApi> page, @Valid TestApi testApi) {
         return testApiService.selectPageVO(page, testApi);
     }
 

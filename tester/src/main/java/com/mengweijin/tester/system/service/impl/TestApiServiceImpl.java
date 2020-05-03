@@ -14,13 +14,13 @@ import com.mengweijin.tester.system.mapper.TestApiMapper;
 import com.mengweijin.tester.system.service.TestApiService;
 import com.mengweijin.tester.system.service.TestCaseService;
 import com.mengweijin.tester.system.service.TestStepService;
+import com.mengweijin.tester.system.vo.TestApiVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -80,7 +80,14 @@ public class TestApiServiceImpl extends ServiceImpl<TestApiMapper, TestApi> impl
     }
 
     @Override
-    public IPage<Map<String, Object>> selectPageVO(IPage<Map<String, Object>> page, TestApi testApi) {
-        return testApiMapper.selectPageVO(page, testApi);
+    public IPage<TestApiVO> selectPageVO(IPage<TestApi> page, TestApi testApi) {
+        IPage<TestApiVO> resultPage = testApiMapper.selectPageVO(page, testApi);
+        List<TestApiVO> testApiVOList = resultPage.getRecords();
+        testApiVOList.forEach(testApiVO -> {
+            testApiVO.setTestCaseNumber(testCaseService.getTestCaseCountByApiId(testApiVO.getId()));
+            testApiVO.setTestCasePassedNumber(testCaseService.getTestCasePassedNumberByApiId(testApiVO.getId()));
+        });
+
+        return resultPage;
     }
 }

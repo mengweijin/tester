@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * <p>
@@ -57,5 +58,10 @@ public class DataSourceInfoController {
     @DeleteMapping("/{id}")
     public void delete(@Valid @Range @PathVariable("id") Long id) {
         dataSourceInfoService.removeById(id);
+    }
+
+    @GetMapping("/list")
+    public List<DataSourceInfo> getList() {
+        return dataSourceInfoService.list();
     }
 }

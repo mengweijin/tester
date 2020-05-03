@@ -1,15 +1,20 @@
 package com.mengweijin.tester.system.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mengweijin.mwjwork.mybatis.page.Pager;
 import com.mengweijin.tester.cucumber.AsyncFactory;
 import com.mengweijin.tester.cucumber.entity.TestCaseSheet;
 import com.mengweijin.tester.cucumber.entity.TestStepSheet;
 import com.mengweijin.tester.cucumber.enums.ECaseStatus;
 import com.mengweijin.tester.system.entity.TestCase;
 import com.mengweijin.tester.system.mapper.TestCaseMapper;
+import com.mengweijin.tester.system.service.TestApiService;
 import com.mengweijin.tester.system.service.TestCaseService;
 import com.mengweijin.tester.system.service.TestStepService;
+import com.mengweijin.tester.system.vo.TestCaseVO;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +33,9 @@ import java.util.List;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class TestCaseServiceImpl extends ServiceImpl<TestCaseMapper, TestCase> implements TestCaseService {
+
+    @Autowired
+    private TestApiService testApiService;
 
     @Autowired
     private TestStepService testStepService;
@@ -64,5 +72,31 @@ public class TestCaseServiceImpl extends ServiceImpl<TestCaseMapper, TestCase> i
     public List<TestCaseSheet> getTestCaseSheetByApiId(Long apiId) {
         List<TestCase> testCaseList = this.lambdaQuery().eq(TestCase::getApiId, apiId).orderByAsc(TestCase::getCreateTime).list();
         return mapperFacade.mapAsList(testCaseList, TestCaseSheet.class);
+    }
+
+    @Override
+    public int getTestCaseCountByApiId(Long apiId) {
+        return this.lambdaQuery().eq(TestCase::getApiId, apiId).count();
+    }
+
+    @Override
+    public int getTestCasePassedNumberByApiId(Long apiId) {
+        return this.lambdaQuery().eq(TestCase::getApiId, apiId).eq(TestCase::getStatus, ECaseStatus.SUCCESS).count();
+    }
+
+    @Override
+    public IPage<TestCaseVO> selectPageVO(IPage<TestCase> page, TestCase testCase) {
+        IPage<TestCase> testCasePage = this.page(page, new QueryWrapper<>(testCase));
+
+        Pager<TestCaseVO> pager = new Pager<>();
+        pager.setCurrent(testCasePage.getCurrent());
+        pager.setSize(testCasePage.getSize());
+        pager.setTotal(testCasePage.getTotal());
+
+        List<TestCase> testCaseList = testCasePage.getRecords();
+        List<TestCaseVO> testCaseVOList = mapperFacade.mapAsList(testCaseList, TestCaseVO.class);
+        testCaseVOList.forEach(vo -> vo.setApiUrl(testApiService.getById(vo.getApiId()).getUrl()));
+        pager.setDataList(testCaseVOList);
+        return pager;
     }
 }

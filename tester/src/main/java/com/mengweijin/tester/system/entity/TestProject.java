@@ -47,5 +47,6 @@ public class TestProject extends BaseEntity {
     /**
      * AT_DATA_SOURCE_INFO id
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long dataSourceId;
 }

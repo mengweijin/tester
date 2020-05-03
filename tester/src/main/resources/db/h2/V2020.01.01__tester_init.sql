@@ -3,7 +3,7 @@ SET FOREIGN_KEY_CHECKS=0;
 drop table IF EXISTS AT_DATA_SOURCE_INFO;
 create TABLE AT_DATA_SOURCE_INFO (
   id bigint NOT NULL COMMENT 'primary key id',
-  name varchar(20) NOT NULL UNIQUE COMMENT 'Unique identification of data source name',
+  name varchar(100) NOT NULL UNIQUE COMMENT 'Unique identification of data source name',
   url varchar(200) NOT NULL COMMENT 'jdbc url',
   username varchar(60) NOT NULL COMMENT 'Database username',
   password varchar(60) DEFAULT NULL COMMENT 'Database password',
@@ -23,7 +23,7 @@ insert into AT_DATA_SOURCE_INFO values(1, 'mysql', 'jdbc:mysql://192.168.233.155
 drop table IF EXISTS AT_TEST_PROJECT;
 create TABLE AT_TEST_PROJECT (
   id bigint NOT NULL COMMENT 'primary key id',
-  name varchar(100) NOT NULL COMMENT 'test project name',
+  name varchar(100) NOT NULL UNIQUE COMMENT 'test project name',
   description varchar(500) NULL COMMENT 'test project description',
   data_source_id bigint NULL COMMENT 'AT_DATASOURCE_INFO id',
   deleted int(4) DEFAULT 0 COMMENT 'Logic delete,（0 no delete; 1 deleted）',

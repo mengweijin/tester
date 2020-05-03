@@ -38,6 +38,7 @@ public class TestStep extends BaseEntity {
     /**
      * AT_TEST_CASE id
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long caseId;
 
     /**

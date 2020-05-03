@@ -3,8 +3,7 @@ package com.mengweijin.tester.system.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.mengweijin.tester.system.entity.TestProject;
-
-import java.util.Map;
+import com.mengweijin.tester.system.vo.TestProjectVO;
 
 /**
  * <p>
@@ -20,7 +19,7 @@ public interface TestProjectService extends IService<TestProject> {
      * select TestProject VO
      * @param page page
      * @param testProject testProject
-     * @return map
+     * @return TestProjectVO
      */
-    IPage<Map<String, Object>> selectPageVO(IPage<Map<String, Object>> page, TestProject testProject);
+    IPage<TestProjectVO> selectPageVO(IPage<TestProject> page, TestProject testProject);
 }

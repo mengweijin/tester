@@ -4,10 +4,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.mengweijin.tester.cucumber.entity.TestCaseExcel;
 import com.mengweijin.tester.system.entity.TestApi;
+import com.mengweijin.tester.system.vo.TestApiVO;
 
 import java.io.File;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -45,5 +45,5 @@ public interface TestApiService extends IService<TestApi> {
      * @param testApi testApi
      * @return map
      */
-    IPage<Map<String, Object>> selectPageVO(IPage<Map<String, Object>> page, TestApi testApi);
+    IPage<TestApiVO> selectPageVO(IPage<TestApi> page, TestApi testApi);
 }

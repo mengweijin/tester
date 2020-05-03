@@ -5,11 +5,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mengweijin.tester.system.entity.TestProject;
 import com.mengweijin.tester.system.mapper.TestProjectMapper;
 import com.mengweijin.tester.system.service.TestProjectService;
+import com.mengweijin.tester.system.vo.TestProjectVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Map;
 
 /**
  * <p>
@@ -27,7 +26,7 @@ public class TestProjectServiceImpl extends ServiceImpl<TestProjectMapper, TestP
     private TestProjectMapper testProjectMapper;
 
     @Override
-    public IPage<Map<String, Object>> selectPageVO(IPage<Map<String, Object>> page, TestProject testProject) {
+    public IPage<TestProjectVO> selectPageVO(IPage<TestProject> page, TestProject testProject) {
         return testProjectMapper.selectPageVO(page, testProject);
     }
 }

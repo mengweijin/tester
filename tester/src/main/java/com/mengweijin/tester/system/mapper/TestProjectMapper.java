@@ -3,10 +3,9 @@ package com.mengweijin.tester.system.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.mengweijin.tester.system.entity.TestProject;
+import com.mengweijin.tester.system.vo.TestProjectVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.Map;
 
 /**
  * <p>
@@ -24,7 +23,7 @@ public interface TestProjectMapper extends BaseMapper<TestProject> {
      *
      * @param page        page
      * @param testProject testProject
-     * @return map
+     * @return TestProjectVO
      */
-    IPage<Map<String, Object>> selectPageVO(IPage<Map<String, Object>> page, @Param("testProject") TestProject testProject);
+    IPage<TestProjectVO> selectPageVO(IPage<TestProject> page, @Param("testProject") TestProject testProject);
 }

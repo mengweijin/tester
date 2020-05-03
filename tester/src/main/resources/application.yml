@@ -19,6 +19,10 @@ spring:
     #date-format: yyyy-MM-dd HH:mm:ss
     # 序列化所有实体类的字段，包括值为null的
     default-property-inclusion: ALWAYS
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
 # Spring Boot的actuator（健康监控）功能，访问：http://localhost:80/actuator
 management:
   endpoints:

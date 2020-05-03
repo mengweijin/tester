@@ -56,6 +56,7 @@ public class TestCase extends BaseEntity {
     /**
      * AT_TEST_API id
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long apiId;
 
     /**

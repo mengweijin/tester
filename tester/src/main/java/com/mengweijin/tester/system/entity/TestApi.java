@@ -48,6 +48,7 @@ public class TestApi extends BaseEntity {
     /**
      * AT_TEST_PROJECT id
      */
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long projectId;
 
 }

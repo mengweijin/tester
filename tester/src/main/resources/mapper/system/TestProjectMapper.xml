@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mengweijin.tester.system.mapper.TestProjectMapper">
 
-    <select id="selectPageVO" resultType="java.util.Map">
+    <select id="selectPageVO" resultType="com.mengweijin.tester.system.vo.TestProjectVO">
         select
             t1.id,
             t1.name,

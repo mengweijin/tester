@@ -1,9 +1,9 @@
 package com.mengweijin.tester.system.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.mengweijin.tester.system.entity.TestCase;
 import com.mengweijin.tester.system.service.TestCaseService;
+import com.mengweijin.tester.system.vo.TestCaseVO;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -45,8 +45,8 @@ public class TestCaseController {
     }
 
     @GetMapping
-    public IPage<TestCase> getPage(IPage<TestCase> page, @Valid TestCase testCase) {
-        return testCaseService.page(page, new QueryWrapper<>(testCase));
+    public IPage<TestCaseVO> selectPageVO(IPage<TestCase> page, @Valid TestCase testCase) {
+        return testCaseService.selectPageVO(page, testCase);
     }
 
     @PostMapping
