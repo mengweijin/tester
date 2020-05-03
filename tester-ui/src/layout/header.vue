@@ -3,9 +3,10 @@
     <el-menu-item index="/index">
       <svg class="icon" aria-hidden="true" font-size="30px"><use xlink:href="#iconzhuye"></use></svg>
     </el-menu-item>
-    <el-menu-item index="/test/project">项目管理</el-menu-item>
     <el-menu-item index="/test/dataSource">数据库信息管理</el-menu-item>
-    <el-menu-item index="/test/api">接口管理</el-menu-item>
+    <el-menu-item index="/test/project">项目管理</el-menu-item>
+    <el-menu-item index="/test/api">测试接口管理</el-menu-item>
+    <el-menu-item index="/test/case">测试用例管理</el-menu-item>
   </el-menu>
 </template>
 

@@ -44,4 +44,8 @@ public class TestProject extends BaseEntity {
      */
     private String description;
 
+    /**
+     * AT_DATA_SOURCE_INFO id
+     */
+    private Long dataSourceId;
 }

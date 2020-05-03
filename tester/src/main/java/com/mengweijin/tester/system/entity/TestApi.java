@@ -46,11 +46,6 @@ public class TestApi extends BaseEntity {
     private HttpMethod httpMethod;
 
     /**
-     * AT_DATA_SOURCE_INFO id
-     */
-    private Long dataSourceId;
-
-    /**
      * AT_TEST_PROJECT id
      */
     private Long projectId;

@@ -13,4 +13,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface DataSourceInfoService extends IService<DataSourceInfo> {
 
+    /**
+     * get data source info by case id
+     * @param caseId case id
+     * @return DataSourceInfo
+     */
+    DataSourceInfo getDataSourceInfoByCaseId(Long caseId);
 }

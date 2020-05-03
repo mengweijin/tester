@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mengweijin.tester.system.entity.DataSourceInfo;
 import com.mengweijin.tester.system.mapper.DataSourceInfoMapper;
 import com.mengweijin.tester.system.service.DataSourceInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,4 +20,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public class DataSourceInfoServiceImpl extends ServiceImpl<DataSourceInfoMapper, DataSourceInfo> implements DataSourceInfoService {
 
+    @Autowired
+    private DataSourceInfoMapper dataSourceInfoMapper;
+
+    @Override
+    public DataSourceInfo getDataSourceInfoByCaseId(Long caseId) {
+        return dataSourceInfoMapper.getDataSourceInfoByCaseId(caseId);
+    }
 }

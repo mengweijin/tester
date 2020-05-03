@@ -11,9 +11,22 @@
         :data="tableData" 
         :row-style="{height:'40px'}" 
         :cell-style="{padding:'5px 0'}">
+        <el-table-column type="expand">
+          <template slot-scope="props">
+            <el-form label-position="left">
+              <el-form-item label="ID"><span>{{ props.row.id }}</span></el-form-item>
+              <el-form-item label="项目名称"><span>{{ props.row.name }}</span></el-form-item>
+              <el-form-item label="描述"><span>{{ props.row.description }}</span></el-form-item>
+              <el-form-item label="数据源名称"><span>{{ props.row.dataSourceName }}</span></el-form-item>
+              <el-form-item label="创建时间"><span>{{ props.row.createTime }}</span></el-form-item>
+              <el-form-item label="最后修改时间"><span>{{ props.row.updateTime }}</span></el-form-item>
+            </el-form>
+          </template>
+        </el-table-column>
         <el-table-column prop="id" label="ID" min-width="180" sortable></el-table-column>
         <el-table-column prop="name" label="项目名称" min-width="300"></el-table-column>
         <el-table-column prop="description" label="描述" min-width="500"></el-table-column>
+        <el-table-column prop="dataSourceName" label="数据源名称" min-width="200"></el-table-column>
         <el-table-column prop="createTime" label="创建时间" min-width="200" :formatter="dateTimeFormat"></el-table-column>
         <el-table-column prop="updateTime" label="最后修改时间" min-width="200" :formatter="dateTimeFormat"></el-table-column>
         <el-table-column fixed="right" label="操作" width="130">

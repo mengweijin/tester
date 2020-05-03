@@ -1,6 +1,5 @@
 package com.mengweijin.tester.system.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.mengweijin.tester.system.entity.TestProject;
 import com.mengweijin.tester.system.service.TestProjectService;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -41,8 +41,8 @@ public class TestProjectController {
     }
 
     @GetMapping
-    public IPage<TestProject> getPage(IPage<TestProject> page, @Valid TestProject testProject) {
-        return testProjectService.page(page, new QueryWrapper<>(testProject));
+    public IPage<Map<String, Object>> selectPageVO(IPage<Map<String, Object>> page, @Valid TestProject testProject) {
+        return testProjectService.selectPageVO(page, testProject);
     }
 
     @PostMapping

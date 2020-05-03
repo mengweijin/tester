@@ -7,18 +7,15 @@
             t1.id,
             t1.url,
             t1.http_method,
-            t1.data_source_id,
             t1.project_id,
             t1.deleted,
             t1.create_by,
             t1.create_time,
             t1.update_by,
             t1.update_time,
-            t2.name as project_name,
-            t3.name as data_source_name
+            t2.name as project_name
         from AT_TEST_API t1
         left join AT_TEST_PROJECT t2 on t1.project_id = t2.id
-        left join AT_DATA_SOURCE_INFO t3 on t1. data_source_id = t3.id
         <where>
             <if test="testApi.id != null">
                 and t1.id = #{id}
@@ -28,9 +25,6 @@
             </if>
             <if test="testApi.httpMethod != null and testApi.httpMethod != ''">
                 and t1.http_method = #{httpMethod}
-            </if>
-            <if test="testApi.dataSourceId != null">
-                and t1.data_source_id = #{dataSourceId}
             </if>
             <if test="testApi.projectId != null">
                 and t1.project_id = #{projectId}

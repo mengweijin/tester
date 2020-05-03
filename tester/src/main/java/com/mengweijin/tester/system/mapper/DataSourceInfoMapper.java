@@ -15,4 +15,10 @@ import org.apache.ibatis.annotations.Mapper;
  @Mapper
 public interface DataSourceInfoMapper extends BaseMapper<DataSourceInfo> {
 
+    /**
+     * Get DataSourceInfo by case id
+     * @param caseId case id
+     * @return DataSourceInfo
+     */
+    DataSourceInfo getDataSourceInfoByCaseId(Long caseId);
 }

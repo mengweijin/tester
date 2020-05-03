@@ -31,6 +31,16 @@ export const Routers = [{
                 }
             },
             {
+                path: '/test/dataSource',
+                components: {
+                    mengweijinHeader: MengweijinHeader,
+                    header: Header,
+                    default: () =>
+                        import ('@/views/datasource/index'),
+                    footer: Footer
+                }
+            },
+            {
                 path: '/test/project',
                 components: {
                     mengweijinHeader: MengweijinHeader,
@@ -47,6 +57,16 @@ export const Routers = [{
                     header: Header,
                     default: () =>
                         import ('@/views/api/index'),
+                    footer: Footer
+                }
+            },
+            {
+                path: '/test/case',
+                components: {
+                    mengweijinHeader: MengweijinHeader,
+                    header: Header,
+                    default: () =>
+                        import ('@/views/case/index'),
                     footer: Footer
                 }
             }

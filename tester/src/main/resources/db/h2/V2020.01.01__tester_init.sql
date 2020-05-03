@@ -25,6 +25,7 @@ create TABLE AT_TEST_PROJECT (
   id bigint NOT NULL COMMENT 'primary key id',
   name varchar(100) NOT NULL COMMENT 'test project name',
   description varchar(500) NULL COMMENT 'test project description',
+  data_source_id bigint NULL COMMENT 'AT_DATASOURCE_INFO id',
   deleted int(4) DEFAULT 0 COMMENT 'Logic delete,（0 no delete; 1 deleted）',
   create_by varchar(64) NULL COMMENT 'Creator',
   create_time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'creation time',
@@ -33,7 +34,7 @@ create TABLE AT_TEST_PROJECT (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='test case';
 
-insert into AT_TEST_PROJECT values(1, 'video-downloader', 'video-downloader description', 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
+insert into AT_TEST_PROJECT values(1, 'video-downloader', 'video-downloader description', 1, 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
 
 
 
@@ -42,7 +43,6 @@ create TABLE AT_TEST_API (
   id bigint NOT NULL COMMENT 'primary key id',
   url varchar(500) NULL COMMENT 'test api url',
   http_method varchar(10) NOT NULL COMMENT 'HTTP method: GET/POST/PUT/DELETE',
-  data_source_id bigint NULL COMMENT 'AT_DATASOURCE_INFO id',
   project_id bigint NOT NULL COMMENT 'AT_TEST_PROJECT id',
   deleted int(4) DEFAULT 0 COMMENT 'Logic delete,（0 no delete; 1 deleted）',
   create_by varchar(64) NULL COMMENT 'Creator',
@@ -52,7 +52,7 @@ create TABLE AT_TEST_API (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='test api';
 
-insert into AT_TEST_API values(1, 'http://localhost:8080/system/testApi/{apiId}', 'GET', 1, 1, 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
+insert into AT_TEST_API values(1, 'http://localhost:8080/system/testApi/{apiId}', 'GET', 1, 0, 'system', '2020-01-01 00:00:00', 'system', '2020-01-01 00:00:00');
 
 
 

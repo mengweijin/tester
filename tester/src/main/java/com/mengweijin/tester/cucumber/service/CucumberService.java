@@ -6,7 +6,6 @@ import com.mengweijin.mwjwork.framework.constant.Const;
 import com.mengweijin.tester.cucumber.enums.ETag;
 import com.mengweijin.tester.cucumber.util.CucumberUtils;
 import com.mengweijin.tester.system.entity.DataSourceInfo;
-import com.mengweijin.tester.system.entity.TestApi;
 import com.mengweijin.tester.system.entity.TestCase;
 import com.mengweijin.tester.system.entity.TestStep;
 import com.mengweijin.tester.system.service.DataSourceInfoService;
@@ -50,9 +49,7 @@ public class CucumberService {
      * @return DataSource
      */
     public DataSource getDataSource(Long caseId) {
-        TestCase testCase = testCaseService.getById(caseId);
-        TestApi testApi = testApiService.getById(testCase.getApiId());
-        DataSourceInfo dataSourceInfo = dataSourceInfoService.getById(testApi.getDataSourceId());
+        DataSourceInfo dataSourceInfo = dataSourceInfoService.getDataSourceInfoByCaseId(caseId);
         return new DriverManagerDataSource(
                 dataSourceInfo.getUrl(),
                 dataSourceInfo.getUsername(),
@@ -67,7 +64,7 @@ public class CucumberService {
      */
     public File generateCaseFeature(Long caseId) {
         TestCase testCase = testCaseService.getById(caseId);
-        TestApi testApi = testApiService.getById(testCase.getApiId());
+        DataSourceInfo dataSourceInfo = dataSourceInfoService.getDataSourceInfoByCaseId(caseId);
 
         List<TestStep> stepAssertList = testStepService.lambdaQuery()
                 .eq(TestStep::getCaseId, caseId)
@@ -77,7 +74,7 @@ public class CucumberService {
         featureContentList.add("Feature: " + testCase.getName());
         featureContentList.add("");
         StringBuilder tagBuilder = new StringBuilder("    ");
-        if (testApi.getDataSourceId() != null) {
+        if (dataSourceInfo != null) {
             tagBuilder.append(ETag.DATA_SOURCE.tag()).append(Const.SPACE);
         }
         if (StrUtil.isNotBlank(testCase.getPreparedDataSql())) {

@@ -2,4 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mengweijin.tester.system.mapper.TestProjectMapper">
 
+    <select id="selectPageVO" resultType="java.util.Map">
+        select
+            t1.id,
+            t1.name,
+            t1.description,
+            t1.data_source_id,
+            t1.deleted,
+            t1.create_by,
+            t1.create_time,
+            t1.update_by,
+            t1.update_time,
+            t2.name as data_source_name
+        from AT_TEST_PROJECT t1
+        left join AT_DATA_SOURCE_INFO t2 on t1.data_source_id = t2.id
+        <where>
+            <if test="testProject.id != null">
+                and t1.id = #{id}
+            </if>
+            <if test="testProject.name != null and testProject.name != ''">
+                and t1.name = #{name}
+            </if>
+            <if test="testProject.description != null and testProject.description != ''">
+                and t1.description = #{description}
+            </if>
+            <if test="testProject.dataSourceId != null">
+                and t1.data_source_id = #{dataSourceId}
+            </if>
+            <if test="testProject.deleted != null">
+                and t1.deleted = #{deleted}
+            </if>
+            <if test="testProject.createBy != null and testProject.createBy != ''">
+                and t1.create_by = #{createBy}
+            </if>
+            <if test="testProject.createTime != null">
+                and t1.create_time = #{createTime}
+            </if>
+            <if test="testProject.updateBy != null and testProject.updateBy != ''">
+                and t1.update_by = #{updateBy}
+            </if>
+            <if test="testProject.updateTime != null">
+                and t1.update_time = #{updateTime}
+            </if>
+        </where>
+    </select>
 </mapper>
