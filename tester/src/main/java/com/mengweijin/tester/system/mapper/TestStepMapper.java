@@ -17,5 +17,10 @@ import java.util.List;
 @Mapper
 public interface TestStepMapper extends BaseMapper<TestStep> {
 
+    /**
+     * Get test step by api id
+     * @param apiId api id
+     * @return testStep
+     */
     List<TestStep> getTestStepByApiId(Long apiId);
 }

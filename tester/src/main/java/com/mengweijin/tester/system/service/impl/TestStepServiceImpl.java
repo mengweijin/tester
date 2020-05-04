@@ -32,9 +32,9 @@ public class TestStepServiceImpl extends ServiceImpl<TestStepMapper, TestStep> i
     private MapperFacade mapperFacade;
 
     @Override
-    public void importStepFromExcel(TestCase testCase, List<TestStepSheet> testStepSheetList) {
+    public void importStepFromExcel(String caseCode, TestCase testCase, List<TestStepSheet> testStepSheetList) {
         List<TestStepSheet> testStepSheets =
-                TestCaseExcelUtils.filterTestStepSheetByCaseCode(testCase.getCode(), testStepSheetList);
+                TestCaseExcelUtils.filterTestStepSheetByCaseCode(caseCode, testStepSheetList);
 
         if (CollectionUtil.isNotEmpty(testStepSheets)) {
             for (TestStepSheet testStepSheet : testStepSheets) {
@@ -48,6 +48,8 @@ public class TestStepServiceImpl extends ServiceImpl<TestStepMapper, TestStep> i
     @Override
     public List<TestStepSheet> getTestStepSheetByApiId(Long apiId) {
         List<TestStep> testStepList = testStepMapper.getTestStepByApiId(apiId);
-        return mapperFacade.mapAsList(testStepList, TestStepSheet.class);
+        List<TestStepSheet> testStepSheetList = mapperFacade.mapAsList(testStepList, TestStepSheet.class);
+        testStepSheetList.forEach(testStepSheet -> testStepSheet.setCaseCode(String.valueOf(testStepSheet.getCaseId())));
+        return testStepSheetList;
     }
 }

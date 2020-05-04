@@ -17,7 +17,18 @@ import java.util.List;
  */
 public interface TestStepService extends IService<TestStep> {
 
-    void importStepFromExcel(TestCase testCase, List<TestStepSheet> testStepSheetList);
+    /**
+     * import step from excel
+     * @param caseCode caseCode
+     * @param testCase testCase
+     * @param testStepSheetList list
+     */
+    void importStepFromExcel(String caseCode, TestCase testCase, List<TestStepSheet> testStepSheetList);
 
+    /**
+     * get test step sheet by apiId
+     * @param apiId api id
+     * @return list
+     */
     List<TestStepSheet> getTestStepSheetByApiId(Long apiId);
 }

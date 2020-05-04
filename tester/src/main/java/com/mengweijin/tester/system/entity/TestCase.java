@@ -39,11 +39,6 @@ public class TestCase extends BaseEntity {
     protected Long id;
 
     /**
-     * Test case code, Associate TEST STEP ASSERT when excel import
-     */
-    private String code;
-
-    /**
      * test case name
      */
     private String name;

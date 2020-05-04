@@ -23,19 +23,20 @@
             </el-form>
           </template>
         </el-table-column>
+        <el-table-column prop="id" label="API ID" min-width="180" sortable v-if="true"></el-table-column>
         <el-table-column prop="projectName" label="项目名称" min-width="200" sortable></el-table-column>
-        <el-table-column prop="id" label="API ID" min-width="180" sortable v-if="false"></el-table-column>
         <el-table-column prop="url" label="URL" min-width="300"></el-table-column>
         <el-table-column prop="testCaseNumber" label="测试用例个数" min-width="100"></el-table-column>
         <el-table-column prop="testCasePassedNumber" label="通过个数" min-width="100"></el-table-column>
         <el-table-column prop="createTime" label="创建时间" min-width="200" :formatter="dateTimeFormat"></el-table-column>
         <el-table-column prop="updateTime" label="最后修改时间" min-width="200" :formatter="dateTimeFormat"></el-table-column>
-        <el-table-column fixed="right" label="操作" width="180">
+        <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
                 <el-button @click="handleDetailClick(scope.row)" type="text" size="medium" title="测试用例详情">
                   <svg class="icon" aria-hidden="true"><use xlink:href="#icondetail"></use></svg>
                 </el-button>
                 <el-button @click="handleEditClick(scope.row)" type="text" size="medium" icon="el-icon-edit-outline" title="编辑"></el-button>
+                <el-button @click="handleRunApiClick(scope.row)" type="text" size="medium" icon="el-icon-video-play" title="执行测试用例"></el-button>
                 <el-button @click="handleImportClick(scope.row)" type="text" size="medium" title="导入测试用例">
                   <svg class="icon" aria-hidden="true"><use xlink:href="#iconimport"></use></svg>
                 </el-button>
@@ -167,6 +168,15 @@
       },
       handleDetailClick(row) {
 
+      },
+      handleRunApiClick(row) {
+        let _this = this;
+        this.$get('/system/test/api/run/' + row.id)
+        .then(function (response) {
+          setTimeout(function(){
+            _this.loadTableData(_this.currentPage, _this.pageSize)
+          }, 2000);
+        })
       },
       handleEditClick(row) {
         this.form = row

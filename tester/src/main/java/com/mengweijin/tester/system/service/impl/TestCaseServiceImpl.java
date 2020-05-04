@@ -63,7 +63,7 @@ public class TestCaseServiceImpl extends ServiceImpl<TestCaseMapper, TestCase> i
                 testCase.setStatus(ECaseStatus.WAITING);
                 this.save(testCase);
 
-                testStepService.importStepFromExcel(testCase, testStepSheetList);
+                testStepService.importStepFromExcel(testCaseSheet.getCode(), testCase, testStepSheetList);
             }
         }
     }
@@ -71,7 +71,9 @@ public class TestCaseServiceImpl extends ServiceImpl<TestCaseMapper, TestCase> i
     @Override
     public List<TestCaseSheet> getTestCaseSheetByApiId(Long apiId) {
         List<TestCase> testCaseList = this.lambdaQuery().eq(TestCase::getApiId, apiId).orderByAsc(TestCase::getCreateTime).list();
-        return mapperFacade.mapAsList(testCaseList, TestCaseSheet.class);
+        List<TestCaseSheet> testCaseSheetList = mapperFacade.mapAsList(testCaseList, TestCaseSheet.class);
+        testCaseSheetList.forEach(testCaseSheet -> testCaseSheet.setCode(String.valueOf(testCaseSheet.getId())));
+        return testCaseSheetList;
     }
 
     @Override
@@ -96,7 +98,7 @@ public class TestCaseServiceImpl extends ServiceImpl<TestCaseMapper, TestCase> i
         List<TestCase> testCaseList = testCasePage.getRecords();
         List<TestCaseVO> testCaseVOList = mapperFacade.mapAsList(testCaseList, TestCaseVO.class);
         testCaseVOList.forEach(vo -> vo.setApiUrl(testApiService.getById(vo.getApiId()).getUrl()));
-        pager.setDataList(testCaseVOList);
+        pager.setRecords(testCaseVOList);
         return pager;
     }
 }

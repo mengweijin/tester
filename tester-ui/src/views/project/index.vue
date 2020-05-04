@@ -23,7 +23,7 @@
             </el-form>
           </template>
         </el-table-column>
-        <el-table-column prop="id" label="ID" min-width="180" sortable v-if="false"></el-table-column>
+        <el-table-column prop="id" label="ID" min-width="180" sortable v-if="true"></el-table-column>
         <el-table-column prop="name" label="项目名称" min-width="300"></el-table-column>
         <el-table-column prop="description" label="描述" min-width="500"></el-table-column>
         <el-table-column prop="dataSourceName" label="数据源名称" min-width="200"></el-table-column>

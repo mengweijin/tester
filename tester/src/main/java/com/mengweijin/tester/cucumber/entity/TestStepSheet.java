@@ -11,6 +11,8 @@ import java.io.Serializable;
 @Data
 public class TestStepSheet implements Serializable {
 
+    private Long caseId;
+
     @Excel(name = "CASE CODE", orderNum = "0")
     private String caseCode;
 

@@ -42,10 +42,6 @@ public class TestStep extends BaseEntity {
     private Long caseId;
 
     /**
-     * Test case code, Associate TEST STEP ASSERT when excel import
-     */
-    private String caseCode;
-    /**
      * EStep enum. 
      */
     private EStep step;
