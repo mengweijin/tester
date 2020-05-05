@@ -13,13 +13,13 @@
         :cell-style="{padding:'5px 0'}">
         <el-table-column type="expand">
           <template slot-scope="props">
-            <el-form label-position="left">
+            <el-form label-position="left" class="table-expand">
               <el-form-item label="ID"><span>{{ props.row.id }}</span></el-form-item>
               <el-form-item label="URL"><span>{{ props.row.url }}</span></el-form-item>
               <el-form-item label="请求方式"><span>{{ props.row.httpMethod }}</span></el-form-item>
               <el-form-item label="项目名称"><span>{{ props.row.projectName }}</span></el-form-item>
-              <el-form-item label="创建时间"><span>{{ props.row.createTime }}</span></el-form-item>
-              <el-form-item label="最后修改时间"><span>{{ props.row.updateTime }}</span></el-form-item>
+              <el-form-item label="创建时间"><span>{{ $dayjs(props.row.createTime).format("YYYY-MM-DD HH:mm:ss") }}</span></el-form-item>
+              <el-form-item label="最后修改时间"><span>{{ $dayjs(props.row.updateTime).format("YYYY-MM-DD HH:mm:ss") }}</span></el-form-item>
             </el-form>
           </template>
         </el-table-column>
@@ -32,10 +32,10 @@
         <el-table-column prop="updateTime" label="最后修改时间" min-width="200" :formatter="dateTimeFormat"></el-table-column>
         <el-table-column fixed="right" label="操作" width="200">
             <template slot-scope="scope">
+                <el-button @click="handleEditClick(scope.row)" type="text" size="medium" icon="el-icon-edit-outline" title="编辑"></el-button>
                 <el-button @click="handleDetailClick(scope.row)" type="text" size="medium" title="测试用例详情">
                   <svg class="icon" aria-hidden="true"><use xlink:href="#icondetail"></use></svg>
                 </el-button>
-                <el-button @click="handleEditClick(scope.row)" type="text" size="medium" icon="el-icon-edit-outline" title="编辑"></el-button>
                 <el-button @click="handleRunApiClick(scope.row)" type="text" size="medium" icon="el-icon-video-play" title="执行测试用例"></el-button>
                 <el-button @click="handleImportClick(scope.row)" type="text" size="medium" title="导入测试用例">
                   <svg class="icon" aria-hidden="true"><use xlink:href="#iconimport"></use></svg>

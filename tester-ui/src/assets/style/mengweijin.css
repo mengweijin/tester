@@ -36,6 +36,16 @@ body,
     z-index: 9999;
 }
 
+.table-expand label {
+    width: 160px;
+    color: #99a9bf;
+}
+
+.table-expand .el-form-item {
+    white-space: pre-wrap;
+    margin: 0 0;
+}
+
 
 /*iconfont必须导入的样式*/
 

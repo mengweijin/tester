@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -78,6 +79,11 @@ public class TestApiController {
     @GetMapping("/{id}")
     public TestApi getById(@Valid @Range @PathVariable("id") Long id) {
         return testApiService.getById(id);
+    }
+
+    @GetMapping("/url/{url}")
+    public List<TestApi> getByUrl(@Valid @NotBlank @PathVariable("url") String url) {
+        return testApiService.lambdaQuery().like(TestApi::getUrl, url).list();
     }
 
     @GetMapping

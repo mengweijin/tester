@@ -13,15 +13,15 @@
         :cell-style="{padding:'5px 0'}">
         <el-table-column type="expand">
           <template slot-scope="props">
-            <el-form label-position="left">
+            <el-form label-position="left" class="table-expand">
               <el-form-item label="ID"><span>{{ props.row.id }}</span></el-form-item>
               <el-form-item label="数据源名称"><span>{{ props.row.name }}</span></el-form-item>
               <el-form-item label="URL"><span>{{ props.row.url }}</span></el-form-item>
               <el-form-item label="用户名"><span>{{ props.row.username }}</span></el-form-item>
               <el-form-item label="密码"><span>{{ props.row.password }}</span></el-form-item>
               <el-form-item label="版本"><span>{{ props.row.version }}</span></el-form-item>
-              <el-form-item label="创建时间"><span>{{ props.row.createTime }}</span></el-form-item>
-              <el-form-item label="最后修改时间"><span>{{ props.row.updateTime }}</span></el-form-item>
+              <el-form-item label="创建时间"><span>{{ $dayjs(props.row.createTime).format("YYYY-MM-DD HH:mm:ss") }}</span></el-form-item>
+              <el-form-item label="最后修改时间"><span>{{ $dayjs(props.row.updateTime).format("YYYY-MM-DD HH:mm:ss") }}</span></el-form-item>
             </el-form>
           </template>
         </el-table-column>

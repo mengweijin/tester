@@ -39,10 +39,10 @@ axios.interceptors.response.use(
                     Message.error({ message: "403", duration: 10000, showClose: true })
                     break;
                 case 404:
-                    Message.error({ message: error.response.data.error + ' server URL ' + error.response.data.path, duration: 10000, showClose: true })
+                    Message.error({ message: "404: " + error.response.data.error + ' server URL ' + error.response.data.path, duration: 10000, showClose: true })
                     break;
                 default:
-                    Message.error({ message: JSON.stringify(error.response.data), duration: 10000, showClose: true })
+                    Message.error({ message: error.response.status + ": " + JSON.stringify(error.response.data), duration: 10000, showClose: true })
                     break;
             }
         }
