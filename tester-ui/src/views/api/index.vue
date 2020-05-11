@@ -26,6 +26,7 @@
         <el-table-column prop="id" label="API ID" min-width="180" sortable v-if="true"></el-table-column>
         <el-table-column prop="projectName" label="项目名称" min-width="200" sortable></el-table-column>
         <el-table-column prop="url" label="URL" min-width="300"></el-table-column>
+        <el-table-column prop="httpMethod" label="请求方式" min-width="100"></el-table-column>
         <el-table-column prop="testCaseNumber" label="测试用例个数" min-width="100"></el-table-column>
         <el-table-column prop="testCasePassedNumber" label="通过个数" min-width="100"></el-table-column>
         <el-table-column prop="createTime" label="创建时间" min-width="200" :formatter="dateTimeFormat"></el-table-column>
