@@ -52,4 +52,9 @@ public class TestStepServiceImpl extends ServiceImpl<TestStepMapper, TestStep> i
         testStepSheetList.forEach(testStepSheet -> testStepSheet.setCaseCode(String.valueOf(testStepSheet.getCaseId())));
         return testStepSheetList;
     }
+
+    @Override
+    public boolean updateActualValueById(Long stepId, String actualValue) {
+        return this.lambdaUpdate().set(TestStep::getActualValue, actualValue).eq(TestStep::getId, stepId).update();
+    }
 }

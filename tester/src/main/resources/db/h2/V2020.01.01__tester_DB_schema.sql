@@ -91,6 +91,7 @@ create TABLE AT_TEST_STEP (
                                  THEN_ASSERT_RESPONSE_JSON_PATH: JSON path的JSON vaule.
                                  ASSERT_RESPONSE:                完整的response body.
                                  ASSERT_DB_DATA:                 []括起来的sql查询结果',
+  actual_value text NULL COMMENT 'Acutal value',
   deleted int(4) DEFAULT 0 COMMENT 'Logic delete,（0 no delete; 1 deleted）',
   create_by varchar(64) NULL COMMENT 'Creator',
   create_time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'creation time',

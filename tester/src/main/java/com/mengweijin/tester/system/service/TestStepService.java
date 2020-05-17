@@ -27,8 +27,18 @@ public interface TestStepService extends IService<TestStep> {
 
     /**
      * get test step sheet by apiId
+     *
      * @param apiId api id
      * @return list
      */
     List<TestStepSheet> getTestStepSheetByApiId(Long apiId);
+
+    /**
+     * udpate actual value by id
+     *
+     * @param stepId      stepId
+     * @param actualValue actualValue
+     * @return true/false
+     */
+    boolean updateActualValueById(Long stepId, String actualValue);
 }

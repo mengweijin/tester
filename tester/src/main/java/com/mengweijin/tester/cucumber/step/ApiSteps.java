@@ -89,7 +89,14 @@ public class ApiSteps implements En {
         Then(EStep.THEN_ASSERT_HTTP_CODE.getDescription() + " {long} {long}", (Long testCaseId, Long testStepId) -> {
             ResponseEntity<Object> responseEntity = ScenarioThreadLocal.get().getResponseEntity();
             TestStepService testStepService = SpringUtils.getBean(TestStepService.class);
-            Assert.assertEquals(testStepService.getById(testStepId).getExpectValue(), String.valueOf(responseEntity.getStatusCode().value()));
+
+            String expectValue = testStepService.getById(testStepId).getExpectValue();
+            String actualValue = String.valueOf(responseEntity.getStatusCode().value());
+            log.debug("Expect value: {}", expectValue);
+            log.debug("Actual value: {}", actualValue);
+            testStepService.updateActualValueById(testStepId, actualValue);
+
+            Assert.assertEquals(expectValue, actualValue);
         });
 
         Then(EStep.THEN_ASSERT_RESPONSE.getDescription() + " {long} {long}", (Long testCaseId, Long testStepId) -> {
@@ -99,6 +106,8 @@ public class ApiSteps implements En {
             Object body = responseEntity.getBody();
             log.debug("Expect value: {}", expectValue);
             log.debug("Actual value: {}", JSON.toJSONString(body));
+            testStepService.updateActualValueById(testStepId, JSON.toJSONString(body));
+
             if (body instanceof Map) {
                 JSONAssert.assertEquals(expectValue, new JSONObject(JSON.toJSONString(body)), false);
             } else if (body instanceof Collection) {
@@ -124,6 +133,8 @@ public class ApiSteps implements En {
             });
             log.debug("Expect value: {}", expectValue);
             log.debug("Actual value: {}", jsonObject);
+            testStepService.updateActualValueById(testStepId, jsonObject.toString());
+
             JSONAssert.assertEquals(expectValue, jsonObject, false);
 
         });
@@ -144,6 +155,8 @@ public class ApiSteps implements En {
 
             log.debug("Expect value: {}", expectValue);
             log.debug("Actual value: {}", actualValue);
+            testStepService.updateActualValueById(testStepId, actualValue);
+
             JSONAssert.assertEquals(expectValue, new JSONArray(actualValue), false);
         });
 

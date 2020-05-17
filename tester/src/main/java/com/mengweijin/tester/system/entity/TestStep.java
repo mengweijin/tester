@@ -75,4 +75,5 @@ public class TestStep extends BaseEntity {
      */
     private String expectValue;
 
+    private String actualValue;
 }
