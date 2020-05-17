@@ -6,6 +6,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.jayway.jsonpath.JsonPath;
 import com.mengweijin.mwjwork.framework.constant.Const;
 import com.mengweijin.mwjwork.framework.util.SpringUtils;
+import com.mengweijin.mwjwork.mybatis.sping.jdbc.CamelColumnMapRowMapper;
 import com.mengweijin.tester.cucumber.entity.StepVariable;
 import com.mengweijin.tester.cucumber.enums.EStep;
 import com.mengweijin.tester.cucumber.util.ScenarioThreadLocal;
@@ -24,6 +25,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
@@ -63,15 +65,25 @@ public class ApiSteps implements En {
             if (StrUtil.isNotBlank(testCase.getUrlParams())) {
                 uriVariables = new JSONObject(testCase.getUrlParams()).toMap();
             }
-            ResponseEntity<Object> responseEntity = restTemplate.exchange(
-                    testCase.getRequestUrl(),
-                    testCase.getHttpMethod(),
-                    httpEntity,
-                    Object.class,
-                    uriVariables);
+
+            ResponseEntity<Object> responseEntity;
+            try {
+                responseEntity = restTemplate.exchange(
+                        testCase.getRequestUrl(),
+                        testCase.getHttpMethod(),
+                        httpEntity,
+                        Object.class,
+                        uriVariables);
+            } catch (HttpStatusCodeException e) {
+                responseEntity = ResponseEntity
+                        .status(e.getRawStatusCode())
+                        .headers(e.getResponseHeaders())
+                        .body(e.getResponseBodyAsString());
+            }
 
             StepVariable stepVariable = ScenarioThreadLocal.get();
             stepVariable.setResponseEntity(responseEntity);
+
         });
 
         Then(EStep.THEN_ASSERT_HTTP_CODE.getDescription() + " {long} {long}", (Long testCaseId, Long testStepId) -> {
@@ -124,8 +136,7 @@ public class ApiSteps implements En {
             cn.hutool.core.lang.Assert.notBlank(assertKey);
             String[] assertSQL = assertKey.split(Const.SEMICOLON);
 
-            List<Map<String, Object>> mapList = jdbcTemplate.queryForList(assertSQL[0]);
-
+            List<Map<String, Object>> mapList = jdbcTemplate.query(assertSQL[0], new CamelColumnMapRowMapper());
             String expectValue = testStep.getExpectValue();
             String actualValue = JSON.toJSONString(mapList,
                     SerializerFeature.WriteNonStringValueAsString,

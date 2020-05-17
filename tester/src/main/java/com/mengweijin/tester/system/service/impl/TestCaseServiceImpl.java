@@ -88,7 +88,7 @@ public class TestCaseServiceImpl extends ServiceImpl<TestCaseMapper, TestCase> i
 
     @Override
     public IPage<TestCaseVO> selectPageVO(IPage<TestCase> page, TestCase testCase) {
-        IPage<TestCase> testCasePage = this.page(page, new QueryWrapper<>(testCase));
+        IPage<TestCase> testCasePage = this.page(page, new QueryWrapper<>(testCase).orderByDesc("create_time"));
 
         Pager<TestCaseVO> pager = new Pager<>();
         pager.setCurrent(testCasePage.getCurrent());
