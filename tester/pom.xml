@@ -32,9 +32,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.mengweijin</groupId>
+			<groupId>com.github.mengweijin</groupId>
 			<artifactId>code-generator</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.0.2</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -108,6 +108,20 @@
 						<goals>
 							<!-- 将所有依赖包全部打到一个Jar包里面 -->
 							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Javadoc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.1.1</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
 						</goals>
 					</execution>
 				</executions>
