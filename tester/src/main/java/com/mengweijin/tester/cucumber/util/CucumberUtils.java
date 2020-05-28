@@ -2,7 +2,7 @@ package com.mengweijin.tester.cucumber.util;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.io.FileUtil;
-import com.mengweijin.mwjwork.framework.constant.Const;
+import com.github.mengweijin.quickboot.framework.constant.Const;
 import io.cucumber.core.cli.Main;
 
 import java.io.File;

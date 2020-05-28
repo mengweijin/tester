@@ -6,7 +6,7 @@ import cn.afterturn.easypoi.excel.entity.ImportParams;
 import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelStyleType;
 import cn.hutool.core.lang.Assert;
-import com.mengweijin.mwjwork.framework.exception.ServerException;
+import com.github.mengweijin.quickboot.framework.exception.ServerException;
 import com.mengweijin.tester.cucumber.entity.TestCaseExcel;
 import com.mengweijin.tester.cucumber.entity.TestCaseSheet;
 import com.mengweijin.tester.cucumber.entity.TestStepSheet;

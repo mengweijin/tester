@@ -1,8 +1,8 @@
 package com.mengweijin.tester.cucumber;
 
 import cn.hutool.core.io.FileUtil;
-import com.mengweijin.mwjwork.framework.constant.Const;
-import com.mengweijin.mwjwork.framework.util.SpringUtils;
+import com.github.mengweijin.quickboot.framework.constant.Const;
+import com.github.mengweijin.quickboot.framework.util.SpringUtils;
 import com.mengweijin.tester.cucumber.entity.StepVariable;
 import com.mengweijin.tester.cucumber.enums.ECaseStatus;
 import com.mengweijin.tester.cucumber.service.CucumberService;
@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
-
 import java.io.File;
 import java.util.concurrent.Future;
 

@@ -1,6 +1,6 @@
 package com.mengweijin.tester.cucumber.plugin;
 
-import com.mengweijin.mwjwork.framework.util.SpringUtils;
+import com.github.mengweijin.quickboot.framework.util.SpringUtils;
 import com.mengweijin.tester.cucumber.enums.ECaseStatus;
 import com.mengweijin.tester.cucumber.util.ScenarioThreadLocal;
 import com.mengweijin.tester.system.entity.TestCase;

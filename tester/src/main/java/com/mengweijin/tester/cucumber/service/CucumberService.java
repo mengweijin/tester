@@ -2,7 +2,7 @@ package com.mengweijin.tester.cucumber.service;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
-import com.mengweijin.mwjwork.framework.constant.Const;
+import com.github.mengweijin.quickboot.framework.constant.Const;
 import com.mengweijin.tester.cucumber.enums.ETag;
 import com.mengweijin.tester.cucumber.util.CucumberUtils;
 import com.mengweijin.tester.system.entity.DataSourceInfo;

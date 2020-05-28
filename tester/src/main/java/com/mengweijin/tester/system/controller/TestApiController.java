@@ -1,8 +1,8 @@
 package com.mengweijin.tester.system.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.mengweijin.mwjwork.framework.exception.ServerException;
-import com.mengweijin.mwjwork.framework.util.UploadUtils;
+import com.github.mengweijin.quickboot.framework.exception.ServerException;
+import com.github.mengweijin.quickboot.framework.util.UploadUtils;
 import com.mengweijin.tester.cucumber.entity.TestCaseExcel;
 import com.mengweijin.tester.cucumber.util.TestCaseExcelUtils;
 import com.mengweijin.tester.system.entity.TestApi;

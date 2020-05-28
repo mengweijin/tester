@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.mengweijin.generator.CodeGenerator;
 import com.github.mengweijin.generator.ConfigProperty;
 import com.github.mengweijin.generator.EDefaultTemplatePath;
-import com.mengweijin.mwjwork.framework.web.BaseController;
-import com.mengweijin.mwjwork.mybatis.BaseEntity;
+import com.github.mengweijin.quickboot.framework.web.BaseController;
+import com.github.mengweijin.quickboot.mybatis.BaseEntity;
 import org.junit.jupiter.api.Test;
 
 public class CodeGeneratorTest {

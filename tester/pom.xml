@@ -2,21 +2,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.mengweijin</groupId>
-		<artifactId>mwjwork</artifactId>
-		<version>1.0.1</version>
-		<relativePath>/</relativePath>
-	</parent>
 
+	<groupId>com.mengweijin</groupId>
 	<artifactId>tester</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>tester</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<mwjwork.version>1.0.1</mwjwork.version>
+		<!-- 跳过maven test，否则打包时耗时较久，开发时可以开启 -->
+		<!-- <skipTests>true</skipTests> -->
+
+		<quickboot.version>1.0.1-SNAPSHOT</quickboot.version>
+		<code-generator.version>1.0.2</code-generator.version>
+
 		<beetl.version>3.0.19.RELEASE</beetl.version>
 		<easypoi.version>4.1.3</easypoi.version>
 		<junit.version>4.13</junit.version>
@@ -26,15 +28,15 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.mengweijin</groupId>
-			<artifactId>mwjwork-mybatis-plus</artifactId>
-			<version>${project.parent.version}</version>
+			<groupId>com.github.mengweijin</groupId>
+			<artifactId>quickboot-mybatis-plus</artifactId>
+			<version>${quickboot.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.github.mengweijin</groupId>
 			<artifactId>code-generator</artifactId>
-			<version>1.0.2</version>
+			<version>${code-generator.version}</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -98,16 +100,50 @@
 		</dependency>
 	</dependencies>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.github.mengweijin</groupId>
+				<artifactId>quickboot-parent</artifactId>
+				<version>${quickboot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<repositories>
+		<repository>
+			<id>oss</id>
+			<name>oss</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<!-- Source -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.2.1</version>
 				<executions>
 					<execution>
+						<phase>package</phase>
 						<goals>
-							<!-- 将所有依赖包全部打到一个Jar包里面 -->
-							<goal>repackage</goal>
+							<goal>jar-no-fork</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -116,7 +152,15 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.1.1</version>
+				<version>3.2.0</version>
+				<configuration>
+					<charset>UTF-8</charset>
+					<docencoding>UTF-8</docencoding>
+					<additionalOptions>
+						<!--由于JDK8的java doc生成机制比之前的要严谨许多,导致项目用maven打包的时候出错 解决办法: 添加-Xdoclint:none配置-->
+						<additionalOption>-Xdoclint:none</additionalOption>
+					</additionalOptions>
+				</configuration>
 				<executions>
 					<execution>
 						<phase>package</phase>
@@ -126,7 +170,24 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<!-- 将所有依赖包全部打到一个Jar包里面 -->
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
+		<!-- 最终打出来的Jar的名称 -->
+		<!-- <finalName>${project.artifactId}</finalName> -->
 	</build>
 
 </project>

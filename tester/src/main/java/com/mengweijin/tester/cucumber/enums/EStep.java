@@ -1,7 +1,7 @@
 package com.mengweijin.tester.cucumber.enums;
 
 import com.baomidou.mybatisplus.core.enums.IEnum;
-import com.mengweijin.mwjwork.framework.constant.Const;
+import com.github.mengweijin.quickboot.framework.constant.Const;
 
 import java.io.Serializable;
 

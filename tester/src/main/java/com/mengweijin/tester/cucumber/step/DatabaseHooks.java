@@ -1,8 +1,8 @@
 package com.mengweijin.tester.cucumber.step;
 
 import cn.hutool.core.util.StrUtil;
-import com.mengweijin.mwjwork.framework.constant.Const;
-import com.mengweijin.mwjwork.framework.util.SpringUtils;
+import com.github.mengweijin.quickboot.framework.constant.Const;
+import com.github.mengweijin.quickboot.framework.util.SpringUtils;
 import com.mengweijin.tester.cucumber.entity.StepVariable;
 import com.mengweijin.tester.cucumber.enums.ETag;
 import com.mengweijin.tester.cucumber.service.CucumberService;

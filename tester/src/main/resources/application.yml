@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 8080
   servlet:
     context-path: /
   tomcat:
@@ -21,10 +21,6 @@ spring:
     #date-format: yyyy-MM-dd HH:mm:ss
     # 序列化所有实体类的字段，包括值为null的
     default-property-inclusion: ALWAYS
-  servlet:
-    multipart:
-      max-file-size: 50MB
-      max-request-size: 50MB
 # Spring Boot的actuator（健康监控）功能，访问：http://localhost:80/actuator
 management:
   endpoints:
@@ -33,9 +29,35 @@ management:
         # 要暴露出来的接口，可配置：health(默认), info（默认）, * 代表所有
         include: ["*"]
         #exclude: ["trace"]
-  #server:
-    #不配置的话默认使用应用程序下的端口
-    #port: 80
+      #server:
+      #不配置的话默认使用应用程序下的端口
+      #port: 80
       #servlet:
       # 默认即为：/actuator
     #context-path: /actuator
+quickboot:
+  # 允许跨域
+  cors:
+    # 是否启用自动配置，如果为false, 则默认不能跨域请求；如果为true，需要配置白名单来允许跨域请求
+    enabled: true
+    # url白名单， 默认 * ，即允许所有ip跨域
+    urlWhiteList:
+    #- http://localhost:80
+    #- http://127.0.0.1:80
+    #- http://localhost:8080
+    #- http://127.0.0.1:8080
+    #- http://localhost:8010
+    #- http://127.0.0.1:8010
+    # header 白名单
+    headerWhiteList:
+    methodWhiteList:
+      - GET
+      - POST
+      - PATCH
+      - PUT
+      - DELETE
+  xss:
+    # 是否启用xss过滤
+    enabled: true
+    # 不需要xss校验的链接（配置示例：/system/*,/tool/*）
+    #excludes: /druid/*,/actuator/*
