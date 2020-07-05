@@ -16,7 +16,7 @@
 		<!-- 跳过maven test，否则打包时耗时较久，开发时可以开启 -->
 		<!-- <skipTests>true</skipTests> -->
 
-		<quickboot.version>1.0.1-SNAPSHOT</quickboot.version>
+		<quickboot.version>1.0.2</quickboot.version>
 		<code-generator.version>1.0.2</code-generator.version>
 
 		<beetl.version>3.0.19.RELEASE</beetl.version>
@@ -173,6 +173,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.3.0.RELEASE</version>
 				<configuration>
 					<fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
 				</configuration>
