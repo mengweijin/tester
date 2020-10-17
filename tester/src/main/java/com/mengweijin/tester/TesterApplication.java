@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * @author mengweijin
  */
-@SpringBootApplication(scanBasePackages = {"com.mengweijin", "com.github.mengweijin"})
+@SpringBootApplication
 public class TesterApplication {
 
     public static void main(String[] args) {

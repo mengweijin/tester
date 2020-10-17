@@ -4,8 +4,8 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.github.mengweijin.quickboot.framework.constant.Const;
+import com.github.mengweijin.quickboot.framework.sping.jdbc.CamelColumnMapRowMapper;
 import com.github.mengweijin.quickboot.framework.util.SpringUtils;
-import com.github.mengweijin.quickboot.mybatis.sping.jdbc.CamelColumnMapRowMapper;
 import com.jayway.jsonpath.JsonPath;
 import com.mengweijin.tester.cucumber.entity.StepVariable;
 import com.mengweijin.tester.cucumber.enums.EStep;
@@ -27,6 +27,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
