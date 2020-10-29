@@ -1,4 +1,4 @@
-package com.mengweijin.tester.cucumber.entity;
+package com.mengweijin.tester.serenity.cucumber.entity;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import lombok.Data;

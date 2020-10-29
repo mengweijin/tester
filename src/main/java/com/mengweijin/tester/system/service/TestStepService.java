@@ -1,7 +1,7 @@
 package com.mengweijin.tester.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.mengweijin.tester.cucumber.entity.TestStepSheet;
+import com.mengweijin.tester.serenity.cucumber.entity.TestStepSheet;
 import com.mengweijin.tester.system.entity.TestCase;
 import com.mengweijin.tester.system.entity.TestStep;
 

@@ -1,4 +1,4 @@
-package com.mengweijin.tester.cucumber.enums;
+package com.mengweijin.tester.serenity.cucumber.enums;
 
 import com.baomidou.mybatisplus.core.enums.IEnum;
 

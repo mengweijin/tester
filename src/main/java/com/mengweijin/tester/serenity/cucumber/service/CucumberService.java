@@ -1,10 +1,10 @@
-package com.mengweijin.tester.cucumber.service;
+package com.mengweijin.tester.serenity.cucumber.service;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
 import com.github.mengweijin.quickboot.framework.constant.Const;
-import com.mengweijin.tester.cucumber.enums.ETag;
-import com.mengweijin.tester.cucumber.util.CucumberUtils;
+import com.mengweijin.tester.serenity.cucumber.enums.ETag;
+import com.mengweijin.tester.serenity.cucumber.util.CucumberUtils;
 import com.mengweijin.tester.system.entity.DataSourceInfo;
 import com.mengweijin.tester.system.entity.TestCase;
 import com.mengweijin.tester.system.entity.TestStep;
@@ -96,7 +96,11 @@ public class CucumberService {
         testCaseService.updateById(testCaseUpdate);
 
         File feature = FileUtil.file(CucumberUtils.CUCUMBER_FEATURE_TMP_PATH + caseId + File.separatorChar + "case_" + caseId + ".feature");
-        FileUtil.mkdir(feature.getParentFile());
+        if(feature.exists()) {
+            FileUtil.del(feature);
+        } else {
+            FileUtil.mkdir(feature.getParentFile());
+        }
         return FileUtil.writeLines(featureContentList, feature, StandardCharsets.UTF_8);
     }
 }

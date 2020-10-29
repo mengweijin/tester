@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.github.mengweijin.quickboot.mybatis.BaseEntity;
-import com.mengweijin.tester.cucumber.enums.ECaseStatus;
+import com.mengweijin.tester.serenity.cucumber.enums.ECaseStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;

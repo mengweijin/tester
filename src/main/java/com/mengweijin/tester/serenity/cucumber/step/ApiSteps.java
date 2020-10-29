@@ -1,4 +1,4 @@
-package com.mengweijin.tester.cucumber.step;
+package com.mengweijin.tester.serenity.cucumber.step;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
@@ -7,9 +7,9 @@ import com.github.mengweijin.quickboot.framework.constant.Const;
 import com.github.mengweijin.quickboot.framework.sping.jdbc.CamelColumnMapRowMapper;
 import com.github.mengweijin.quickboot.framework.util.SpringUtils;
 import com.jayway.jsonpath.JsonPath;
-import com.mengweijin.tester.cucumber.entity.StepVariable;
-import com.mengweijin.tester.cucumber.enums.EStep;
-import com.mengweijin.tester.cucumber.util.ScenarioThreadLocal;
+import com.mengweijin.tester.serenity.cucumber.entity.StepParameter;
+import com.mengweijin.tester.serenity.cucumber.enums.EStep;
+import com.mengweijin.tester.serenity.cucumber.util.ScenarioThreadLocal;
 import com.mengweijin.tester.system.entity.TestCase;
 import com.mengweijin.tester.system.entity.TestStep;
 import com.mengweijin.tester.system.service.TestCaseService;
@@ -44,8 +44,8 @@ public class ApiSteps implements En {
     public ApiSteps() {
 
         Given(EStep.GIVEN_TOKEN.getDescription() + " {long} {long}", (Long testCaseId, Long testStepId) -> {
-            StepVariable stepVariable = ScenarioThreadLocal.get();
-            stepVariable.setToken("abc");
+            StepParameter stepParameter = ScenarioThreadLocal.get();
+            stepParameter.setToken("abc");
         });
 
         Given(EStep.GIVEN_HTTP_HEADER.getDescription() + " {long} {long}", (Long testCaseId, Long testStepId) -> {
@@ -81,8 +81,8 @@ public class ApiSteps implements En {
                         .body(e.getResponseBodyAsString());
             }
 
-            StepVariable stepVariable = ScenarioThreadLocal.get();
-            stepVariable.setResponseEntity(responseEntity);
+            StepParameter stepParameter = ScenarioThreadLocal.get();
+            stepParameter.setResponseEntity(responseEntity);
 
         });
 

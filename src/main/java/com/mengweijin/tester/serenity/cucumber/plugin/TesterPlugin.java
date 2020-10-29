@@ -1,8 +1,8 @@
-package com.mengweijin.tester.cucumber.plugin;
+package com.mengweijin.tester.serenity.cucumber.plugin;
 
 import com.github.mengweijin.quickboot.framework.util.SpringUtils;
-import com.mengweijin.tester.cucumber.enums.ECaseStatus;
-import com.mengweijin.tester.cucumber.util.ScenarioThreadLocal;
+import com.mengweijin.tester.serenity.cucumber.enums.ECaseStatus;
+import com.mengweijin.tester.serenity.cucumber.util.ScenarioThreadLocal;
 import com.mengweijin.tester.system.entity.TestCase;
 import com.mengweijin.tester.system.service.TestCaseService;
 import io.cucumber.plugin.EventListener;
