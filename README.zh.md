@@ -9,3 +9,11 @@ Language: [English](README.md)
 
 Behaviour-Driven Development(BDD) Test Automation
 
+## 页面展示
+![image](docs/image/data-source-list.png)
+
+![image](docs/image/api-list.png)
+
+![image](docs/image/case-list.png)
+
+![image](docs/image/case-add.png)
